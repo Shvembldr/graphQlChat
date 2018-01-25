@@ -1,0 +1,25 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input__wrapper {
+  display: flex;
+  flex-direction: row;
+  min-height: 40px;
+}
+
+.input__area {
+  width: 100%;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.input__send {
+  border-radius: 5px;
+  background-color: chocolate;
+  border: none;
+  margin-left: 2px;
+  cursor: pointer;
+}

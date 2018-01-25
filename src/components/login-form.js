@@ -1,9 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import Input from './form-elements/input';
-import { Button, Grid, Message, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import Loader from "./common/loader";
 
 const LoginForm = ({ onSubmit }) => {
   const validate = values => {
@@ -18,49 +17,40 @@ const LoginForm = ({ onSubmit }) => {
   };
 
   return (
-    <Grid verticalAlign="middle" textAlign="center" centered>
-      <Grid.Column width={4}>
-        <Form
-          onSubmit={onSubmit}
-          validate={validate}
-          render={({ handleSubmit, reset, submitting, pristine, values }) => (
-            <form onSubmit={handleSubmit}>
-              <Segment secondary padded>
-                <Field
-                  icon="mail outline"
-                  fluid
-                  name="email"
-                  component={Input}
-                  placeholder={'email'}
-                />
-                <br />
-                <Field
-                  icon="lock"
-                  fluid
-                  type="password"
-                  name="password"
-                  component={Input}
-                  placeholder={'Пароль'}
-                />
-              </Segment>
+    <div className="form">
+      <div className="form-container">
+        <div className="form__content">
+          <Form
+            onSubmit={onSubmit}
+            validate={validate}
+            render={({ handleSubmit, reset, submitting, pristine, values }) => (
+              <form onSubmit={handleSubmit}>
+                  <Field
+                    name="email"
+                    component={Input}
+                    placeholder={'email'}
+                  />
+                  <Field
+                    type="password"
+                    name="password"
+                    component={Input}
+                    placeholder={'Пароль'}
+                  />
 
-              <Button
-                fluid
-                size="large"
-                color="teal"
-                type="submit"
-                loading={submitting}
-              >
-                Войти
-              </Button>
-            </form>
-          )}
-        />
-        <Message>
-          <Link to="/register">Зарегистрироваться</Link>
-        </Message>
-      </Grid.Column>
-    </Grid>
+                {submitting ? (
+                  <Loader />
+                ) : (
+                  <button type="submit" className="form__submit">
+                    Войти
+                  </button>
+                )}
+              </form>
+            )}
+          />
+            <Link to="/register">Зарегистрироваться</Link>
+        </div>
+      </div>
+    </div>
   );
 };
 

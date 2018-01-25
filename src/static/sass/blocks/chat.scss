@@ -1,0 +1,31 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chat__header {
+  background-color: $grey;
+  height: 5%;
+  min-height: 65px;
+  width: 100%;
+}
+
+.chat__window-wrapper {
+ }
+
+.chat__window {
+  background-color: white;
+  height: 85%;
+  min-height: 120px;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+}
+
+.chat__input {
+  background-color: $yellow;
+  height: 10%;
+  padding: 10px 20px;
+}

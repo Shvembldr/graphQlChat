@@ -1,5 +1,5 @@
 import {graphql} from "react-apollo";
-import {LOGIN_MUTATION, REGISTER_USER_MUTATION, USER_QUERY} from "./queries/user";
+import {LOGIN_MUTATION, REGISTER_USER_MUTATION, USER_QUERY} from "./gql";
 
 export const RegisterUserMutation = graphql(REGISTER_USER_MUTATION, {
   props: ({ mutate }) => ({

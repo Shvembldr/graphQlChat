@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { UserQuery } from '../../graphql';
-import Layout from '../common/layout';
+import { UserQuery } from '../../graphql/user/graphql';
+import Layout from '../main-page/layout';
 
+@UserQuery
 class MainPage extends Component {
   static propTypes = {
     user: PropTypes.object,
@@ -13,11 +14,11 @@ class MainPage extends Component {
     return (
       user && (
         <div>
-          <Layout />
+          <Layout user={user}/>
         </div>
       )
     );
   }
 }
 
-export default UserQuery(MainPage);
+export default MainPage;

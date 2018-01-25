@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import LoginForm from '../login-form';
-import { LoginMutation } from '../../graphql';
+import { LoginMutation } from '../../graphql/user/graphql';
 import history from './../../history';
 
+@LoginMutation
 class LoginPage extends Component {
-  static propTypes = {};
+  static propTypes = {
+    login: PropTypes.func
+  };
 
   state = {
     error: null,
@@ -39,4 +42,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginMutation(LoginPage);
+export default LoginPage;

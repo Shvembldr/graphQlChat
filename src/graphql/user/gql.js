@@ -3,8 +3,24 @@ import gql from 'graphql-tag';
 export const USER_QUERY = gql`
   query userQuery {
     me {
+      id
       name
       email
+      teams {
+        id
+        name
+      }
+      channels {
+        id
+        name
+        team {
+          id
+        }
+      }
+      messages {
+        id
+        text
+      }
     }
   }
 `;

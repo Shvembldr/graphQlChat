@@ -1,0 +1,35 @@
+.team {
+  width: 60px;
+  height: 60px;
+  background-color: indianred;
+  margin-top: 15px;
+  border-radius: 10%;
+  cursor: pointer;
+  font-size: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    animation: shadow-drop-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+}
+
+.team__select {
+  display: none;
+}
+
+.team__select:checked ~ label .team {
+  border: 2px solid rgba(0,0,0,0.75);
+}
+
+@keyframes shadow-drop-center {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.35);
+  }
+}

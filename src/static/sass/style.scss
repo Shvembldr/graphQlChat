@@ -1,0 +1,18 @@
+@import "normalize/import-now";
+
+@import "variables";
+@import "mixins";
+
+@import "global/fonts";
+@import "global/layout";
+
+@import "blocks/chat";
+@import "blocks/main-page";
+@import "blocks/aside";
+@import "blocks/team";
+@import "blocks/sidebar-main";
+@import "blocks/channel";
+@import "blocks/message";
+@import "blocks/input";
+@import "blocks/form";
+@import "blocks/loader";

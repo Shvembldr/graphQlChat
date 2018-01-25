@@ -1,0 +1,68 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  @include respond-to($desktop) {
+    min-width: 1280px;
+  }
+
+  margin: 0 auto;
+  min-width: 360px;
+  background-color: $grey;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+::-webkit-input-placeholder {
+  @include fs13-normal;
+  color: #858E98;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 15px;
+  letter-spacing: 0.47px;
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+fieldset {
+  border: none;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}

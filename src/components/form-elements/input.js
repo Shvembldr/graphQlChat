@@ -1,24 +1,18 @@
 import React, { Fragment } from 'react';
-import {Input, Label, Form} from 'semantic-ui-react';
 
-const MaterialInput = ({ input, meta, ...rest }) => {
+const Input = ({ input, meta, ...rest }) => {
   return (
-    <Form.Field>
-      <Input
-        error={meta.error && meta.touched}
-        {...input}
-        {...rest}
+    <Fragment>
+      <input
+        className="form__input"
+        onBlur={input.onBlur}
+        onFocus={input.onFocus}
         onChange={input.onChange}
-        size="small"
+        {...rest}
       />
-      {meta.error &&
-        meta.touched && (
-          <Label basic color="red" pointing>
-            {meta.error}
-          </Label>
-        )}
-    </Form.Field>
+      {meta.touched && <div className="form__error">{meta.error}</div>}
+    </Fragment>
   );
 };
 
-export default MaterialInput;
+export default Input;
