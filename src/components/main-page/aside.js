@@ -1,68 +1,75 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const Aside = ({
-  user,
-  selectedTeam,
-  selectedChannel,
-  selectTeam,
-  selectChannel,
-}) => {
-  return (
-    <aside className="aside">
-      <ul className="aside__teams sidebar-teams">
-        {user.teams.map(team => (
-          <li key={team.id}>
-            <input
-              className="team__select"
-              id={team.id}
-              name="team"
-              type="radio"
-              defaultChecked={team.id === selectedTeam}
-            />
-            <label htmlFor={team.id} onClick={() => selectTeam(team.id)}>
-              <div className="team">a</div>
-            </label>
-          </li>
-        ))}
-      </ul>
-      <div className="aside__main sidebar-main">
-        <h1 className="sidebar-main__title">{user.teams[0].name}</h1>
-        <h3 className="sidebar-main__user">{user.name}</h3>
-        <ul className="sidebar-main__channels">
-          <h3>Каналы</h3>
-          {user.channels
-            .filter(channel => channel.team.id === selectedTeam)
-            .map(channel => (
-            <li key={channel.id}>
+class Aside extends Component {
+  static propTypes = {
+    user: PropTypes.object,
+    selectedTeam: PropTypes.object,
+    selectedChannel: PropTypes.object,
+    selectTeam: PropTypes.func,
+    selectChannel: PropTypes.func,
+  };
+
+  render() {
+    const {
+      user,
+      selectedTeam,
+      selectedChannel,
+      selectTeam,
+      selectChannel,
+    } = this.props;
+    return (
+      <aside className="aside">
+        <ul className="aside__teams sidebar-teams">
+          {user.teams.map(team => (
+            <li key={team.id}>
               <input
-                className="channel__select"
-                id={channel.id}
-                name="channel"
+                className="team__select"
+                id={team.id}
+                name="team"
                 type="radio"
-                defaultChecked={channel.id === selectedChannel}
+                defaultChecked={team.id === selectedTeam.id}
               />
-              <label
-                className="channel"
-                htmlFor={channel.id}
-                onClick={() => selectChannel(channel.id)}
-              >
-                {channel.name}
+              <label htmlFor={team.id} onClick={() => selectTeam(team)}>
+                <div className="team">a</div>
               </label>
             </li>
           ))}
         </ul>
-      </div>
-    </aside>
-  );
-};
+        <div className="aside__main sidebar-main">
+          <h1 className="sidebar-main__title">{selectedTeam.name}</h1>
+          <h3 className="sidebar-main__user">{user.name}</h3>
+          <ul className="sidebar-main__channels channels">
+            <div className="channels__title">
+              <h3>Каналы</h3>
+              <div className="channels__add-channel">+</div>
+            </div>
+            {user.channels
+              .filter(channel => channel.team.id === selectedTeam.id)
+              .map(channel => (
+                <li key={channel.id}>
+                  <input
+                    className="channel__select"
+                    id={channel.id}
+                    name="channel"
+                    type="radio"
+                    defaultChecked={channel.id === selectedChannel.id}
+                  />
+                  <label
+                    className="channel__item"
+                    htmlFor={channel.id}
+                    onClick={() => selectChannel(channel)}
+                  >
+                    {channel.name}
+                  </label>
+                </li>
+              ))}
+          </ul>
+        </div>
+      </aside>
+    );
+  }
+}
 
-Aside.propTypes = {
-  user: PropTypes.object,
-  selectedTeam: PropTypes.number,
-  selectedChannel: PropTypes.number,
-  selectTeam: PropTypes.func,
-  selectChannel: PropTypes.func,
-};
 
 export default Aside;

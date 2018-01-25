@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Aside from './aside';
 import ChatWindow from './chat-window';
-import ChatInput from "./chat-input";
+import ChatInput from './chat-input';
 
 class Layout extends Component {
   static propTypes = {
@@ -10,13 +10,16 @@ class Layout extends Component {
   };
 
   state = {
-    selectedTeam: this.props.user.teams[0].id,
-    selectedChannel: this.props.user.channels[0].id,
+    selectedTeam: this.props.user.teams[0],
+    selectedChannel: this.props.user.channels[0]
   };
 
-  selectTeam = id => {
+  selectTeam = team => {
     this.setState({
-      selectedTeam: id,
+      selectedTeam: team,
+      selectedChannel: this.props.user.channels.filter(
+        channel => channel.team.id === team.id,
+      )[0],
     });
     console.log(this.state);
   };
@@ -42,8 +45,8 @@ class Layout extends Component {
         />
         <section className="chat">
           <header className="chat__header">.</header>
-          <ChatWindow channelId={selectedChannel}/>
-          <ChatInput channelId={selectedChannel} userId={user.id}/>
+          <ChatWindow channelId={selectedChannel.id} />
+          <ChatInput channelId={selectedChannel.id} userId={user.id} />
         </section>
       </main>
     );

@@ -14,27 +14,14 @@ class ChatWindow extends Component {
   };
 
   componentWillMount() {
-    this.props.subscribeToNewMessages(this.props.channelId);
+    this.unsubscribe = this.props.subscribeToNewMessages(this.props.channelId);
   }
 
-  // componentWillMount() {
-  //   this.unsubscribe = this.props.subscribeToNewMessages(this.props.channelId);
-  // }
-  //
-  // componentWillReceiveProps({ channelId }) {
-  //   if (this.props.channelId !== channelId) {
-  //     if (this.unsubscribe) {
-  //       this.unsubscribe();
-  //     }
-  //     this.unsubscribe = this.props.subscribeToNewMessages(channelId);
-  //   }
-  // }
-  //
-  // componentWillUnmount() {
-  //   if (this.unsubscribe) {
-  //     this.unsubscribe();
-  //   }
-  // }
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
 
   render() {
     const { messages } = this.props;

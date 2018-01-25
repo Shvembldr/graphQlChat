@@ -1,7 +1,12 @@
 import { graphql } from 'react-apollo';
-import {MESSAGES_QUERY, CREATE_MESSAGE_MUTATION, NEW_MESSAGE_SUBSCRIPTION} from './gql';
+import {
+  MESSAGES_QUERY,
+  CREATE_MESSAGE_MUTATION,
+  NEW_MESSAGE_SUBSCRIPTION,
+} from './gql';
 
 export const MessageQuery = graphql(MESSAGES_QUERY, {
+  // skip: ownProps => ownProps.channelId === -1,
   name: 'messages',
   options: ({ channelId }) => ({
     variables: { channelId },
@@ -12,24 +17,24 @@ export const MessageQuery = graphql(MESSAGES_QUERY, {
       loading: loading,
       error: error,
       messages: messages ? messages : null,
-      subscribeToNewMessages: channelId => { props.messages.subscribeToMore({
-        document: NEW_MESSAGE_SUBSCRIPTION,
-        variables: {
-          channelId
-        },
-        updateQuery: (prev, { subscriptionData }) => {
-          if (!subscriptionData) {
-            return prev;
-          }
+      subscribeToNewMessages: channelId => {
+        props.messages.subscribeToMore({
+          document: NEW_MESSAGE_SUBSCRIPTION,
+          variables: {
+            channelId,
+          },
+          updateQuery: (prev, { subscriptionData }) => {
+            if (!subscriptionData) {
+              return prev;
+            }
 
-          return {
-            ...prev,
-            messages: [...prev.messages, subscriptionData.data.newMessage],
-          };
-        },
-      })
-
-      }
+            return {
+              ...prev,
+              messages: [...prev.messages, subscriptionData.data.newMessage],
+            };
+          },
+        });
+      },
     };
   },
 });
