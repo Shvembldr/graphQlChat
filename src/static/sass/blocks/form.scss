@@ -78,3 +78,10 @@
   color: darkred;
   transition: all 0.3s ease-in-out;
 }
+
+.form__add-channel {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

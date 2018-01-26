@@ -6,7 +6,6 @@ import {
 } from './gql';
 
 export const MessageQuery = graphql(MESSAGES_QUERY, {
-  // skip: ownProps => ownProps.channelId === -1,
   name: 'messages',
   options: ({ channelId }) => ({
     variables: { channelId },
@@ -67,18 +66,3 @@ export const createMessageMutation = graphql(CREATE_MESSAGE_MUTATION, {
   // },
 });
 
-export const newMessageSubscription = graphql(NEW_MESSAGE_SUBSCRIPTION, {
-  options: ({ channelId }) => ({
-    variables: { channelId },
-  }),
-  updateQuery: (prev, { subscriptionData }) => {
-    if (!subscriptionData) {
-      return prev;
-    }
-
-    return {
-      ...prev,
-      messages: [...prev.messages, subscriptionData.newMessage],
-    };
-  },
-});

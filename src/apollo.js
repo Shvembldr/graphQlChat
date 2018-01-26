@@ -21,11 +21,13 @@ const wsLink = new WebSocketLink({
 });
 
 const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('x-token');
+  const refreshToken = localStorage.getItem('x-refresh-token');
   return {
     headers: {
       ...headers,
-      'x-token': token ? token : null,
-      'x-refresh-token': refreshToken ? refreshToken : null
+      'x-token': token ? token : '',
+      'x-refresh-token': refreshToken ? refreshToken : ''
     }
   }
 });

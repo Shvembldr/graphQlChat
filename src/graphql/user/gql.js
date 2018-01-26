@@ -25,6 +25,15 @@ export const USER_QUERY = gql`
   }
 `;
 
+export const USERS_QUERY = gql`
+  query usersQuery($teamId: Int!) {
+    users(teamId: $teamId) {
+      id
+      name
+    }
+  }
+`;
+
 export const REGISTER_USER_MUTATION = gql`
   mutation register($input: UserInput!) {
     register(input: $input) {

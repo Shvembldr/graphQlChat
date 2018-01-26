@@ -17,6 +17,16 @@ class ChatWindow extends Component {
     this.unsubscribe = this.props.subscribeToNewMessages(this.props.channelId);
   }
 
+  componentWillReceiveProps({ channelId }) {
+    if (this.props.channelId !== channelId) {
+
+      if (this.unsubscribe) {
+        this.unsubscribe();
+      }
+      this.unsubscribe = this.props.subscribeToNewMessages(channelId);
+    }
+  }
+
   componentWillUnmount() {
     if (this.unsubscribe) {
       this.unsubscribe();

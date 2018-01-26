@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import Input from './form-elements/input';
-import { Link } from 'react-router-dom';
-import Loader from "./common/loader";
+import Loader from './common/loader';
 
 const LoginForm = ({ onSubmit }) => {
   const validate = values => {
@@ -25,17 +25,13 @@ const LoginForm = ({ onSubmit }) => {
             validate={validate}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
               <form onSubmit={handleSubmit}>
-                  <Field
-                    name="email"
-                    component={Input}
-                    placeholder={'email'}
-                  />
-                  <Field
-                    type="password"
-                    name="password"
-                    component={Input}
-                    placeholder={'Пароль'}
-                  />
+                <Field name="email" component={Input} placeholder={'email'} />
+                <Field
+                  type="password"
+                  name="password"
+                  component={Input}
+                  placeholder={'Пароль'}
+                />
 
                 {submitting ? (
                   <Loader />
@@ -47,7 +43,7 @@ const LoginForm = ({ onSubmit }) => {
               </form>
             )}
           />
-            <Link to="/register">Зарегистрироваться</Link>
+          <Link to="/register">Зарегистрироваться</Link>
         </div>
       </div>
     </div>
