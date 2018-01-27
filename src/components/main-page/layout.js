@@ -11,22 +11,20 @@ class Layout extends Component {
 
   state = {
     selectedTeam: this.props.user.teams[0],
-    selectedChannel: this.props.user.channels[0]
+    selectedChannel: this.props.user.teams[0].channels[0]
   };
 
   selectTeam = team => {
     this.setState({
       selectedTeam: team,
-      selectedChannel: this.props.user.channels.filter(
-        channel => channel.team.id === team.id,
-      )[0],
+      selectedChannel: team.channels[0],
     });
     console.log(this.state);
   };
 
-  selectChannel = id => {
+  selectChannel = channel => {
     this.setState({
-      selectedChannel: id,
+      selectedChannel: channel,
     });
     console.log(this.state);
   };

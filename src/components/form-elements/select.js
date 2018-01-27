@@ -4,6 +4,7 @@ import Select from 'react-select';
 
 class FormSelect extends Component {
   static propTypes = {
+    options: PropTypes.arrayOf(PropTypes.object)
   };
 
   state = {

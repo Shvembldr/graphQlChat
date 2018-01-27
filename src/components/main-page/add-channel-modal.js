@@ -18,6 +18,7 @@ class AddChannelModal extends Component {
     teamId: PropTypes.number,
     users: PropTypes.arrayOf(PropTypes.object),
     createPrivateChannel: PropTypes.func,
+    currentUserId: PropTypes.number
   };
 
   componentDidMount = () => {
@@ -43,19 +44,19 @@ class AddChannelModal extends Component {
   };
 
    onSubmit = async (values) => {
-
-    console.log(values);
     await this.props.createPrivateChannel({
       name: values.channelName,
-      users: values.users,
+      users: [...values.users, this.props.currentUserId],
       teamId: this.props.teamId
     });
     this.props.onClose();
   };
 
   render() {
-    const { open, users } = this.props;
-    const options = users && users.map(user => ({label: user.name, value: user.id}));
+    const { open, users, currentUserId } = this.props;
+    const options = users && users
+      .filter(user => user.id !== currentUserId)
+      .map(user => ({label: user.name, value: user.id}));
     return (
       open && users && (
         <div>

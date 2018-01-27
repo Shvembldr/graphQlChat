@@ -7,6 +7,7 @@ import Layout from '../main-page/layout';
 class MainPage extends Component {
   static propTypes = {
     user: PropTypes.object,
+    publicChannels: PropTypes.arrayOf(PropTypes.object)
   };
 
   render() {
@@ -14,7 +15,7 @@ class MainPage extends Component {
     return (
       user && (
         <div>
-          <Layout user={user}/>
+          <Layout user={user} />
         </div>
       )
     );

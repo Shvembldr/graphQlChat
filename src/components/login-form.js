@@ -32,7 +32,6 @@ const LoginForm = ({ onSubmit }) => {
                   component={Input}
                   placeholder={'Пароль'}
                 />
-
                 {submitting ? (
                   <Loader />
                 ) : (

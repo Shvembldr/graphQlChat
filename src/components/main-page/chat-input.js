@@ -23,15 +23,20 @@ class ChatInput extends Component {
   };
 
   sendMessage = async () => {
-    try {
-      await this.props.createMessage({
-        channelId: this.props.channelId,
-        text: this.state.input,
-        userId: this.props.userId,
-      });
-      this.input.value = '';
-    } catch (err) {
-      console.log(err)
+    if (this.state.input) {
+      try {
+        await this.props.createMessage({
+          channelId: this.props.channelId,
+          text: this.state.input,
+          userId: this.props.userId,
+        });
+        this.input.value = '';
+        this.setState({
+          input: ''
+        })
+      } catch (err) {
+        console.log(err)
+      }
     }
   };
 
@@ -50,9 +55,6 @@ class ChatInput extends Component {
             className="input__area"
             onChange={this.handleChange}
           />
-          <button className="input__send" onClick={this.sendMessage}>
-            Отправить
-          </button>
         </div>
       </div>
     );

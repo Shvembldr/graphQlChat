@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const CREATE_PUBLIC_CHANNEL_MUTATION = gql`
-  mutation createPublicChannelMutation($input: PublicChannelInput!){
+  mutation createPublicChannelMutation($input: PublicChannelInput!) {
     createPublicChannel(input: $input) {
       id
       name
@@ -11,11 +11,23 @@ export const CREATE_PUBLIC_CHANNEL_MUTATION = gql`
 `;
 
 export const CREATE_PRIVATE_CHANNEL_MUTATION = gql`
-  mutation createPrivateChannelMutation($input: PrivateChannelInput!){
+  mutation createPrivateChannelMutation($input: PrivateChannelInput!) {
     createPrivateChannel(input: $input) {
       id
       name
       isPublic
+    }
+  }
+`;
+
+export const PUBLIC_CHANNELS_QUERY = gql`
+  query publicChannelsQuery {
+    publicChannels {
+      id
+      name
+      team {
+        id
+      }
     }
   }
 `;

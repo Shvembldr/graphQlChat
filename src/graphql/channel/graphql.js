@@ -1,5 +1,5 @@
 import { graphql } from 'react-apollo';
-import { CREATE_PRIVATE_CHANNEL_MUTATION } from './gql';
+import {CREATE_PRIVATE_CHANNEL_MUTATION, PUBLIC_CHANNELS_QUERY} from './gql';
 
 export const CreatePrivateChannel = graphql(
   CREATE_PRIVATE_CHANNEL_MUTATION,
@@ -30,3 +30,15 @@ export const CreatePrivateChannel = graphql(
     // },
   },
 );
+
+export const getPublicChannels = graphql(PUBLIC_CHANNELS_QUERY, {
+  props: ({ data }) => {
+    const { error, loading, publicChannels } = data;
+    return {
+      loading: loading,
+      error: error,
+      publicChannels: publicChannels ? publicChannels : null,
+    };
+  },
+
+});

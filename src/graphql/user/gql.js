@@ -9,6 +9,10 @@ export const USER_QUERY = gql`
       teams {
         id
         name
+        channels {
+          id
+          name
+        }
       }
       channels {
         id
@@ -16,10 +20,6 @@ export const USER_QUERY = gql`
         team {
           id
         }
-      }
-      messages {
-        id
-        text
       }
     }
   }
@@ -35,7 +35,7 @@ export const USERS_QUERY = gql`
 `;
 
 export const REGISTER_USER_MUTATION = gql`
-  mutation register($input: UserInput!) {
+  mutation register($input: RegisterInput!) {
     register(input: $input) {
       name
     }

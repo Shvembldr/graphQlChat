@@ -10,9 +10,9 @@ class RegisterPage extends Component {
     createUser: PropTypes.func,
   };
 
-  onSubmit = async ({ name, email, password }) => {
+  onSubmit = async ({ name, email, password, invite }) => {
     try {
-      await this.props.createUser({name, email, password});
+      await this.props.createUser({name, email, password, invite});
       history.push('/login')
     } catch (err) {
       console.log(err)

@@ -9,6 +9,7 @@ class Aside extends Component {
     selectedChannel: PropTypes.object,
     selectTeam: PropTypes.func,
     selectChannel: PropTypes.func,
+    publicChannels: PropTypes.arrayOf(PropTypes.object),
   };
 
   state = {
@@ -43,12 +44,15 @@ class Aside extends Component {
               <li key={team.id}>
                 <input
                   className="team__select"
-                  id={team.id}
+                  id={`team-${team.id}`}
                   name="team"
                   type="radio"
                   defaultChecked={team.id === selectedTeam.id}
                 />
-                <label htmlFor={team.id} onClick={() => selectTeam(team)}>
+                <label
+                  htmlFor={`team-${team.id}`}
+                  onClick={() => selectTeam(team)}
+                >
                   <div className="team">a</div>
                 </label>
               </li>
@@ -64,20 +68,24 @@ class Aside extends Component {
                   +
                 </div>
               </div>
-              {user.channels
-                .filter(channel => channel.team.id === selectedTeam.id)
+              {selectedTeam.channels
+                .concat(
+                  user.channels.filter(
+                    channel => channel.team.id === selectedTeam.id,
+                  ),
+                )
                 .map(channel => (
                   <li key={channel.id}>
                     <input
                       className="channel__select"
-                      id={channel.id}
+                      id={`channel-${channel.id}`}
                       name="channel"
                       type="radio"
                       defaultChecked={channel.id === selectedChannel.id}
                     />
                     <label
                       className="channel__item"
-                      htmlFor={channel.id}
+                      htmlFor={`channel-${channel.id}`}
                       onClick={() => selectChannel(channel)}
                     >
                       {channel.name}
@@ -91,6 +99,7 @@ class Aside extends Component {
           open={this.state.modalOpen}
           teamId={selectedTeam.id}
           onClose={this.closeModal}
+          currentUserId={user.id}
         />
       </Fragment>
     );

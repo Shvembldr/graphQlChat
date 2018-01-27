@@ -3,9 +3,9 @@ import {LOGIN_MUTATION, REGISTER_USER_MUTATION, USER_QUERY, USERS_QUERY} from ".
 
 export const RegisterUserMutation = graphql(REGISTER_USER_MUTATION, {
   props: ({ mutate }) => ({
-    createUser: ({ name, email, password }) =>
+    createUser: ({ name, email, password, invite }) =>
       mutate({
-        variables: { input: { name, email, password }},
+        variables: { input: { name, email, password, invite }},
       }),
   }),
 });

@@ -5,7 +5,7 @@ import {
   NEW_MESSAGE_SUBSCRIPTION,
 } from './gql';
 
-export const MessageQuery = graphql(MESSAGES_QUERY, {
+export const MessagesQuery = graphql(MESSAGES_QUERY, {
   name: 'messages',
   options: ({ channelId }) => ({
     variables: { channelId },
@@ -17,7 +17,7 @@ export const MessageQuery = graphql(MESSAGES_QUERY, {
       error: error,
       messages: messages ? messages : null,
       subscribeToNewMessages: channelId => {
-        props.messages.subscribeToMore({
+        return props.messages.subscribeToMore({
           document: NEW_MESSAGE_SUBSCRIPTION,
           variables: {
             channelId,

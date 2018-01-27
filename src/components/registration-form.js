@@ -31,6 +31,10 @@ const RegistrationForm = ({ onSubmit, user }) => {
       errors.email = 'Обязательно';
     }
 
+    if (!values.invite) {
+      errors.invite = 'Обязательно';
+    }
+
     return errors;
   };
 
@@ -57,6 +61,11 @@ const RegistrationForm = ({ onSubmit, user }) => {
                     name="password2"
                     component={Input}
                     placeholder={'Подтвердите пароль'}
+                  />
+                  <Field
+                    name="invite"
+                    component={Input}
+                    placeholder={'Invite'}
                   />
                 </Fragment>
                 {submitting ? (
