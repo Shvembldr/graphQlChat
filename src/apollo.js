@@ -9,15 +9,20 @@ import { getMainDefinition } from 'apollo-utilities';
 const token = localStorage.getItem('x-token');
 const refreshToken = localStorage.getItem('x-refresh-token');
 
+const server =
+  process.env.NODE_ENV === 'development'
+    ? 'localhost:4000'
+    : 'graphql-chat-server.herokuapp.com';
+
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/subscriptions`,
+  uri: `ws://${server}/subscriptions`,
   options: {
     reconnect: true,
     connectionParams: {
       token,
       refreshToken,
-    }
-  }
+    },
+  },
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -27,12 +32,12 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       'x-token': token ? token : '',
-      'x-refresh-token': refreshToken ? refreshToken : ''
-    }
-  }
+      'x-refresh-token': refreshToken ? refreshToken : '',
+    },
+  };
 });
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000/graphql' });
+const httpLink = new HttpLink({ uri: `http://${server}/graphql` });
 const httpLinkWithAuth = authLink.concat(httpLink);
 
 const link = split(
@@ -43,7 +48,6 @@ const link = split(
   wsLink,
   httpLinkWithAuth,
 );
-
 
 export const client = new ApolloClient({
   link,
