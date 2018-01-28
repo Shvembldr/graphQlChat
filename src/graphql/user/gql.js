@@ -9,6 +9,9 @@ export const USER_QUERY = gql`
       teams {
         id
         name
+        owner {
+          id
+        }
         channels {
           id
           name

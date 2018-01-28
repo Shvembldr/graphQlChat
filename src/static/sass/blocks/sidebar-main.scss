@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   color: white;
+
 }
 
 .sidebar-main__title {
@@ -11,11 +12,18 @@
   margin-left: 30px;
 }
 
-.sidebar-main__user {
+.sidebar-main__user-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-left: 45px;
   position: relative;
-  cursor: pointer;
+}
 
+.sidebar-main__user {
+  position: relative;
+  cursor: pointer;
   &:before {
     position: absolute;
     content: '';
@@ -26,5 +34,28 @@
     border-radius: 50%;
     background-color: $yellow;
   }
+}
+
+.sidebar-main__invite-button {
+  margin-right: 30px;
+  border: 2px solid white;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.sidebar-main__invite {
+  padding: 10px 20px;
+  font-size: 12px;
+  position: fixed;
+  top: 50px;
+  left: 500px;
+  border: 1px solid black;
+  color: black;
+  background-color: $yellow;
 }
 

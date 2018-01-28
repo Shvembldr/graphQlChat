@@ -5,7 +5,6 @@ export const CREATE_PUBLIC_CHANNEL_MUTATION = gql`
     createPublicChannel(input: $input) {
       id
       name
-      isPublic
     }
   }
 `;
@@ -15,19 +14,10 @@ export const CREATE_PRIVATE_CHANNEL_MUTATION = gql`
     createPrivateChannel(input: $input) {
       id
       name
-      isPublic
-    }
-  }
-`;
-
-export const PUBLIC_CHANNELS_QUERY = gql`
-  query publicChannelsQuery {
-    publicChannels {
-      id
-      name
       team {
         id
       }
     }
   }
 `;
+

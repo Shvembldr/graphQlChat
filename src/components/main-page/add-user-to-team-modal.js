@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
-import { compose } from 'react-apollo';
 
 import Input from '../form-elements/input';
 import Loader from '../common/loader';
-import {UsersQuery} from "../../graphql/user/graphql";
-import FormSelect from "../form-elements/select";
-import {CreatePrivateChannel} from "../../graphql/channel/graphql";
+import {AddUserToTeam} from "../../graphql/team/graphql";
 
 
-@compose(UsersQuery, CreatePrivateChannel)
-class AddUserToTeamModal extends Component {
+@AddUserToTeam
+class AddChannelModal extends Component {
   static propTypes = {
     open: PropTypes.bool,
     onClose: PropTypes.func,
-    teamId: PropTypes.number,
-    users: PropTypes.arrayOf(PropTypes.object),
-    createPrivateChannel: PropTypes.func,
-    currentUserId: PropTypes.number
+    currentUserId: PropTypes.number,
+    addUserToTeam: PropTypes.func
   };
 
   componentDidMount = () => {
@@ -43,37 +38,31 @@ class AddUserToTeamModal extends Component {
     }
   };
 
-   onSubmit = async (values) => {
-    await this.props.createPrivateChannel({
-      name: values.channelName,
-      users: [...values.users, this.props.currentUserId],
-      teamId: this.props.teamId
+  onSubmit = async ({invite}) => {
+    await this.props.addUserToTeam({
+      invite,
+      userId: this.props.currentUserId,
     });
     this.props.onClose();
   };
 
   render() {
-    const { open, users, currentUserId } = this.props;
-    const options = users && users
-      .filter(user => user.id !== currentUserId)
-      .map(user => ({label: user.name, value: user.id}));
+    const { open, currentUserId } = this.props;
     return (
-      open && users && (
+      open && (
         <div>
           <div className="modal__overlay" onClick={this.onOverlayClick} />
           <div className="modal__content">
             <Form
               onSubmit={this.onSubmit}
-              // validate={validate}
               render={({ handleSubmit, reset, submitting, pristine, values }) => (
                 <form className="form__add-channel" onSubmit={handleSubmit}>
-                  <Field name="channelName" component={Input} placeholder={'name'} />
-                  <Field name="users" component={FormSelect} options={options} placeholder={'add users'} />
+                  <Field name="invite" component={Input} placeholder={'Enter your invite'} />
                   {submitting ? (
                     <Loader />
                   ) : (
                     <button type="submit" className="form__submit">
-                      Create Channel
+                      Add Team
                     </button>
                   )}
                 </form>
@@ -86,4 +75,4 @@ class AddUserToTeamModal extends Component {
   }
 }
 
-export default AddUserToTeamModal;
+export default AddChannelModal;

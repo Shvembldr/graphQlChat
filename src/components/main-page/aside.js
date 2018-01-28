@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import AddChannelModal from './add-channel-modal';
 
+import AddChannelModal from './add-channel-modal';
+import AddUserToTeamModal from './add-user-to-team-modal';
+import { CreateInvite } from '../../graphql/invite/graphql';
+
+@CreateInvite
 class Aside extends Component {
   static propTypes = {
     user: PropTypes.object,
@@ -10,6 +14,8 @@ class Aside extends Component {
     selectTeam: PropTypes.func,
     selectChannel: PropTypes.func,
     publicChannels: PropTypes.arrayOf(PropTypes.object),
+    createInvite: PropTypes.func,
+    addUserToTeam: PropTypes.func
   };
 
   state = {
@@ -25,7 +31,22 @@ class Aside extends Component {
   closeModal = () => {
     this.setState({
       modalOpen: false,
+      invite: null,
     });
+  };
+
+  getInvite = async () => {
+    const { data: { createInvite: { token }}} = await this.props.createInvite({
+      teamId: this.props.selectedTeam.id,
+    });
+    this.setState({
+      invite: token
+    });
+    setTimeout(() => {
+      this.setState({
+        invite: null
+      })
+    }, 5000)
   };
 
   render() {
@@ -41,7 +62,7 @@ class Aside extends Component {
         <aside className="aside">
           <ul className="aside__teams sidebar-teams">
             {user.teams.map(team => (
-              <li key={team.id}>
+              <li key={`team-${team.id}`}>
                 <input
                   className="team__select"
                   id={`team-${team.id}`}
@@ -57,10 +78,24 @@ class Aside extends Component {
                 </label>
               </li>
             ))}
+            <li key="new_team" className="team__new"/>
           </ul>
           <div className="aside__main sidebar-main">
             <h1 className="sidebar-main__title">{selectedTeam.name}</h1>
-            <h3 className="sidebar-main__user">{user.name}</h3>
+            <div className="sidebar-main__user-container">
+              <div className="sidebar-main__user">{user.name}</div>
+              {user.id === selectedTeam.owner.id && (
+                <div
+                  className="sidebar-main__invite-button"
+                  onClick={this.getInvite}
+                >
+                  invite
+                </div>
+              )}
+              {this.state.invite && (
+                <div className="sidebar-main__invite">{this.state.invite}</div>
+              )}
+            </div>
             <ul className="sidebar-main__channels channels">
               <div className="channels__title">
                 <h3>Каналы</h3>
