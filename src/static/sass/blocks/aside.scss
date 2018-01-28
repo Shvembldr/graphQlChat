@@ -1,14 +1,15 @@
 .aside {
   height: 100%;
-  background-color: $dark;
+  background-color: $second;
   width: 20%;
   min-width: 400px;
   display: flex;
   flex-direction: row;
+  color: $last;
 }
 
 .aside__teams {
-  background-color: $light;
+  background-color: $third;
   width: 30%;
   min-width: 100px;
   display: flex;

@@ -52,7 +52,7 @@
   }
 
   &:hover {
-    background-color: darkslategrey;
+    background-color: #788686;
   }
 }
 
@@ -61,7 +61,7 @@
 }
 
 .channel__select:checked ~ .channel__item {
-  background-color: darkgreen;
+  background-color: #5B7272;
 }
 
 .channel__select {

@@ -10,7 +10,7 @@ import Loader from '../common/loader';
 const validate = values => {
   const errors = {};
   if (!values.invite) {
-    errors.invite = 'Обязательно';
+    errors.invite = 'Required';
   }
   return errors;
 };

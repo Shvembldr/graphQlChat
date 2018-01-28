@@ -1,6 +1,3 @@
-.form {
-  width: 100%;
-}
 
 .form-container {
   display: flex;
@@ -8,64 +5,90 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  min-height: 100%;
   padding: 20px;
+  margin-bottom: 10vh;
 }
 
 .form__content {
-  border-radius: 10px 10px 10px 10px;
-  background: #fff;
   padding: 30px;
   width: 90%;
   max-width: 450px;
   position: relative;
-  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+}
+
+.form__input-container {
+  position: relative;
+  margin-top: 40px;
+  margin-bottom: 15px;
 }
 
 .form__input {
-  background-color: #f6f6f6;
-  color: #0d0d0d;
-  padding: 15px 32px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  background-color: transparent;
+  border-bottom: 1px solid $third;
+  padding: 5px 20px;
+
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 5px;
-  width: 85%;
-  border: 2px solid #f6f6f6;
-  transition: all 0.5s ease-in-out;
-  border-radius: 5px 5px 5px 5px;
+}
 
-  &:focus {
-    background-color: #fff;
-    border-bottom: 2px solid $yellow;
-  }
+.form__input:focus ~ .focus-border,
+.has-content.form__input ~ .focus-border {
+  width: 100%;
+  transition: 0.4s;
+  left: 0;
+}
 
-  &::placeholder {
-    color: #cccccc;
-  }
+.form__input:focus ~ label,
+.has-content.form__input ~ label {
+  top: -20px;
+  font-size: 0;
+  color: $second;
+  transition: 0.3s;
+  letter-spacing: 1px;
+
+}
+
+.form__input  ~ .focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: $third;
+  transition: 0.4s;
+}
+
+.form__input ~ label {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  color: $fourth;
+  transition: 0.3s;
+  z-index: -1;
+  letter-spacing: 2px;
 }
 
 .form__submit {
-  background-color: $dark;
-  border: none;
-  color: white;
+  border: 1px solid $last;
+  color: $last;
   padding: 15px 80px;
+  background-color: transparent;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   text-transform: uppercase;
   font-size: 13px;
-  border-radius: 5px 5px 5px 5px;
-  margin: 15px 20px 15px 20px;
+  width: 230px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 
   &:hover {
-    background-color: $yellow;
-    box-shadow: 0 10px 30px 0 rgba(206,146,45,0.4);
-
+    background-color: $second;
+    color: $last;
   }
 
   &:active {
@@ -74,9 +97,18 @@
 }
 
 .form__error {
-  font-size: 12px;
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
   color: darkred;
   transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.form__error--visible {
+  opacity: 1;
 }
 
 .form__add-channel .form__add-team {
@@ -84,5 +116,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.form__link {
+  transition: all 0.3s ease-in-out;
+  color: $last;
+  &:hover {
+    color: $third;
+  }
+}
+
+.form__button-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 

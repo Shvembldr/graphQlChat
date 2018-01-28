@@ -1,0 +1,14 @@
+.right-side {
+  @include respond-to($mobile) {
+    height: 100%;
+
+  }
+
+  @include respond-to($desktop) {
+    height: 60vh;
+
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

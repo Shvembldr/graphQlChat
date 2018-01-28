@@ -1,0 +1,16 @@
+.main {
+  @include respond-to($mobile) {
+    min-width: 360px;
+  }
+
+  @include respond-to($desktop) {
+
+  }
+
+  flex-direction: column;
+  margin: 0 auto;
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+}
+

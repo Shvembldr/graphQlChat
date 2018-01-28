@@ -3,14 +3,11 @@ html {
 }
 
 body {
-  @include respond-to($desktop) {
-    min-width: 1280px;
-  }
-
   margin: 0 auto;
   min-width: 360px;
-  background-color: $grey;
-  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  background-color: $first;
+  color: $last;
+  font-family: 'Source Sans Pro', 'Arial', sans-serif;
   box-sizing: border-box;
 }
 

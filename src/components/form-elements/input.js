@@ -1,17 +1,25 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-const Input = ({ input, meta, ...rest }) => {
+const Input = ({ input, meta, label, ...rest }) => {
   return (
-    <Fragment>
+    <div className="form__input-container">
       <input
-        className="form__input"
+        className={input.value ? 'form__input has-content' : 'form__input'}
         onBlur={input.onBlur}
         onFocus={input.onFocus}
         onChange={input.onChange}
         {...rest}
       />
-      {meta.touched && <div className="form__error">{meta.error}</div>}
-    </Fragment>
+      <label>{label}</label>
+      <span className="focus-border" />
+      <div
+        className={
+          !meta.touched ? 'form__error' : 'form__error form__error--visible'
+        }
+      >
+        {meta.error}
+      </div>
+    </div>
   );
 };
 

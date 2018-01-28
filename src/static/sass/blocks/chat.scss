@@ -5,7 +5,7 @@
 }
 
 .chat__header {
-  background-color: $grey;
+  background-color: #BFCACA;
   height: 5%;
   min-height: 65px;
   width: 100%;
@@ -15,7 +15,7 @@
  }
 
 .chat__window {
-  background-color: white;
+  background-color: transparent;
   height: 85%;
   min-height: 120px;
   padding-left: 30px;
@@ -25,7 +25,7 @@
 }
 
 .chat__input {
-  background-color: $yellow;
+  background-color: transparent;
   height: 10%;
-  padding: 10px 20px;
+  padding: 20px 20px;
 }

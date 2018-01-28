@@ -1,7 +1,8 @@
 .team {
   width: 60px;
   height: 60px;
-  background-color: indianred;
+  background-color: transparent;
+  border: 1px solid $last;
   margin-top: 15px;
   border-radius: 10%;
   cursor: pointer;

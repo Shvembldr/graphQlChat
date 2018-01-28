@@ -1,5 +1,5 @@
-$desktop: '(min-width: 1280px)';
-$mobile : '(min-width: 320px)';
+$desktop: '(min-width: 420px)';
+$mobile : '(min-width: 320px) and (max-width: 420px)';
 
 
 $dark: #1C202D;
@@ -9,4 +9,8 @@ $brown: #6A483B;
 $yellow: #CE922D;
 
 
-
+$first: #EAECEC;
+$second: #9BA2A2;
+$third: #73747A;
+$fourth: #727A75;
+$last: #292D34;

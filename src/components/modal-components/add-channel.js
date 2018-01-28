@@ -13,10 +13,10 @@ import {connect} from "react-redux";
 const validate = values => {
   const errors = {};
   if (!values.channelName) {
-    errors.channelName = 'Обязательно';
+    errors.channelName = 'Required';
   }
   if (!values.users) {
-    errors.users = 'Обязательно';
+    errors.users = 'Required';
   }
   return errors;
 };

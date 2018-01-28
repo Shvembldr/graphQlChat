@@ -1,5 +1,5 @@
 .cssload-loader {
-  position: relative;
+  position: absolute;
   left: calc(50% - 26px);
   width: 53px;
   height: 53px;
@@ -9,7 +9,6 @@
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   perspective: 660px;
-  margin: 10px 0;
 }
 
 .cssload-inner {
@@ -36,7 +35,7 @@
   -ms-animation: cssload-rotate-one 0.65s linear infinite;
   -webkit-animation: cssload-rotate-one 0.65s linear infinite;
   -moz-animation: cssload-rotate-one 0.65s linear infinite;
-  border-bottom: 2px solid rgb(0,0,0);
+  border-bottom: 2px solid $third;
 }
 
 .cssload-inner.cssload-two {
@@ -47,7 +46,7 @@
   -ms-animation: cssload-rotate-two 0.65s linear infinite;
   -webkit-animation: cssload-rotate-two 0.65s linear infinite;
   -moz-animation: cssload-rotate-two 0.65s linear infinite;
-  border-right: 2px solid rgb(0,0,0);
+  border-right: 2px solid $fourth;
 }
 
 .cssload-inner.cssload-three {
@@ -58,7 +57,7 @@
   -ms-animation: cssload-rotate-three 0.65s linear infinite;
   -webkit-animation: cssload-rotate-three 0.65s linear infinite;
   -moz-animation: cssload-rotate-three 0.65s linear infinite;
-  border-top: 2px solid rgb(0,0,0);
+  border-top: 2px solid $last;
 }
 
 

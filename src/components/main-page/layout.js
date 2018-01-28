@@ -11,7 +11,7 @@ class Layout extends Component {
 
   state = {
     selectedTeam: this.props.user.teams[0],
-    selectedChannel: this.props.user.teams[0].channels[0]
+    selectedChannel: this.props.user.teams[0].channels[0],
   };
 
   selectTeam = team => {
@@ -42,7 +42,7 @@ class Layout extends Component {
           selectChannel={this.selectChannel}
         />
         <section className="chat">
-          <header className="chat__header">.</header>
+          <header className="chat__header" />
           <ChatWindow channelId={selectedChannel.id} />
           <ChatInput channelId={selectedChannel.id} userId={user.id} />
         </section>

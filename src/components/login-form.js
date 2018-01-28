@@ -3,21 +3,22 @@ import { Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import Input from './form-elements/input';
 import Loader from './common/loader';
+import LoginLayout from './common/login-layout';
 
 const LoginForm = ({ onSubmit }) => {
   const validate = values => {
     const errors = {};
     if (!values.email) {
-      errors.email = 'Обязательно';
+      errors.email = 'Required';
     }
     if (!values.password) {
-      errors.password = 'Обязательно';
+      errors.password = 'Required';
     }
     return errors;
   };
 
   return (
-    <div className="form">
+    <LoginLayout>
       <div className="form-container">
         <div className="form__content">
           <Form
@@ -25,27 +26,31 @@ const LoginForm = ({ onSubmit }) => {
             validate={validate}
             render={({ handleSubmit, reset, submitting, pristine, values }) => (
               <form onSubmit={handleSubmit}>
-                <Field name="email" component={Input} placeholder={'email'} />
+                <Field name="email" component={Input} label={'email'} />
                 <Field
                   type="password"
                   name="password"
                   component={Input}
-                  placeholder={'Пароль'}
+                  label={'password'}
                 />
-                {submitting ? (
-                  <Loader />
-                ) : (
-                  <button type="submit" className="form__submit">
-                    Войти
-                  </button>
-                )}
+                <div className="form__button-container">
+                  {submitting ? (
+                    <Loader />
+                  ) : (
+                    <button type="submit" className="form__submit">
+                      Login
+                    </button>
+                  )}
+                </div>
               </form>
             )}
           />
-          <Link to="/register">Зарегистрироваться</Link>
+          <Link to="/register">
+            <div className="form__link">Registration</div>
+          </Link>
         </div>
       </div>
-    </div>
+    </LoginLayout>
   );
 };
 

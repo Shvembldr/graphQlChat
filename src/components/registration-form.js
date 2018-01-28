@@ -3,24 +3,25 @@ import { Form, Field } from 'react-final-form';
 import Input from './form-elements/input';
 import { Link } from 'react-router-dom';
 import Loader from './common/loader';
+import LoginLayout from './common/login-layout';
 
 const RegistrationForm = ({ onSubmit, user }) => {
   const validate = values => {
     const errors = {};
     if (!values.name) {
-      errors.name = 'Обязательно';
+      errors.name = 'Required';
     }
     if (values.name && values.name.length < 3) {
       errors.name = 'Имя должно быть больше 3 символов';
     }
     if (!values.password) {
-      errors.password = 'Обязательно';
+      errors.password = 'Required';
     }
     if (values.password && values.password.length < 8) {
       errors.password = 'Пароль должен быть больше 8 символов';
     }
     if (!values.password2) {
-      errors.password2 = 'Обязательно';
+      errors.password2 = 'Required';
     }
 
     if (values.password !== values.password2) {
@@ -28,18 +29,18 @@ const RegistrationForm = ({ onSubmit, user }) => {
     }
 
     if (!values.email) {
-      errors.email = 'Обязательно';
+      errors.email = 'Required';
     }
 
     if (!values.invite) {
-      errors.invite = 'Обязательно';
+      errors.invite = 'Required';
     }
 
     return errors;
   };
 
   return (
-    <div className="form">
+    <LoginLayout>
       <div className="form-container">
         <div className="form__content">
           <Form
@@ -48,40 +49,46 @@ const RegistrationForm = ({ onSubmit, user }) => {
             render={({ handleSubmit, reset, submitting }) => (
               <form onSubmit={handleSubmit}>
                 <Fragment>
-                  <Field name="name" component={Input} placeholder={'Имя'} />
-                  <Field name="email" component={Input} placeholder={'Email'} />
+                  <Field name="name" component={Input} label={'name'} />
+                  <Field name="email" component={Input} label={'email'} />
                   <Field
                     type="password"
                     name="password"
                     component={Input}
-                    placeholder={'Пароль'}
+                    label={'password'}
                   />
                   <Field
                     type="password"
                     name="password2"
                     component={Input}
-                    placeholder={'Подтвердите пароль'}
+                    label={'confirm password'}
                   />
                   <Field
                     name="invite"
                     component={Input}
-                    placeholder={'Invite'}
+                    label={'your invite'}
                   />
                 </Fragment>
-                {submitting ? (
-                  <Loader />
-                ) : (
-                  <button type="submit" className="form__submit">
-                    Регистрация
-                  </button>
-                )}
+                <div className="form__button-container">
+                  {submitting ? (
+                    <Loader />
+                  ) : (
+                    <button type="submit" className="form__submit">
+                      Register
+                    </button>
+                  )}
+                </div>
               </form>
             )}
           />
-          {!user && <Link to="/login">Войти</Link>}
+          {!user && (
+            <Link to="/login">
+              <div className="form__link">Login</div>
+            </Link>
+          )}
         </div>
       </div>
-    </div>
+    </LoginLayout>
   );
 };
 
