@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
@@ -13,13 +13,15 @@ class FormSelect extends Component {
 
   handleSelectChange = value => {
     this.setState({ value });
-    this.props.input.onChange(value.split(',').map(id => parseInt(id, 10)));
+    value
+      ? this.props.input.onChange(value.split(',').map(id => parseInt(id, 10)))
+      : this.props.input.onChange('');
   };
 
   render() {
     const { input, meta, options, ...rest } = this.props;
     return (
-      <Fragment>
+      <div className="form__input-container">
         <Select
           style={{
             width: `100%`,
@@ -34,8 +36,14 @@ class FormSelect extends Component {
           value={this.state.value}
           {...rest}
         />
-        {meta.touched && <div className="form__error">{meta.error}</div>}
-      </Fragment>
+        <div
+          className={
+            !meta.touched ? 'form__error' : 'form__error form__error--visible'
+          }
+        >
+          {meta.error}
+        </div>
+      </div>
     );
   }
 }

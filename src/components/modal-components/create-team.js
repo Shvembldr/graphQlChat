@@ -2,38 +2,34 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FormSelect from '../form-elements/select';
 import Input from '../form-elements/input';
-import { CreatePrivateChannel } from '../../graphql/channel/graphql';
 import { Form, Field } from 'react-final-form';
 import Loader from '../common/loader';
 import { hideModal } from '../../redux/actions/modal';
 import {connect} from "react-redux";
+import {CreateTeamMutation} from "../../graphql/team/graphql";
 
 const validate = values => {
   const errors = {};
-  if (!values.channelName) {
-    errors.channelName = 'Required';
-  }
-  if (!values.users) {
-    errors.users = 'Required';
+  if (!values.teamName) {
+    errors.teamName = 'Required';
   }
   return errors;
 };
 
-@CreatePrivateChannel
-class AddChannel extends Component {
+@CreateTeamMutation
+class CreateTeam extends Component {
   static propTypes = {
     users: PropTypes.arrayOf(PropTypes.object),
-    createPrivateChannel: PropTypes.func,
+    createTeam: PropTypes.func,
     currentUserId: PropTypes.number,
-    teamId: PropTypes.number,
     hideModal: PropTypes.func,
   };
 
   onSubmit = async values => {
-    await this.props.createPrivateChannel({
-      name: values.channelName,
-      users: [...values.users, this.props.currentUserId],
-      teamId: this.props.teamId,
+    await this.props.createTeam({
+      name: values.teamName,
+      members: [...values.users],
+      owner: this.props.currentUserId,
     });
     this.props.hideModal();
   };
@@ -49,7 +45,7 @@ class AddChannel extends Component {
         validate={validate}
         render={({ handleSubmit, reset, submitting, pristine, values }) => (
           <form className="form__add-channel" onSubmit={handleSubmit}>
-            <Field name="channelName" component={Input} label={'name'} />
+            <Field name="teamName" component={Input} label={'team name'} />
             <Field
               name="users"
               component={FormSelect}
@@ -61,7 +57,7 @@ class AddChannel extends Component {
                 <Loader />
               ) : (
                 <button type="submit" className="form__submit">
-                  Add Channel
+                  Add Team
                 </button>
               )}
             </div>
@@ -72,4 +68,4 @@ class AddChannel extends Component {
   }
 }
 
-export default connect(null, { hideModal })(AddChannel);
+export default connect(null, { hideModal })(CreateTeam);

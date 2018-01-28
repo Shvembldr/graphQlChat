@@ -23,11 +23,11 @@
 }
 
 .team__new {
-  width: 60px;
-  height: 60px;
-  border: 3px solid white;
+  width: 30px;
+  height: 30px;
+  border: 1px solid $last;
   border-radius: 50%;
-  margin-top: 10px;
+  margin-top: 25px;
   position: relative;
   opacity: 0.6;
   cursor: pointer;
@@ -35,21 +35,21 @@
   &:before {
     position: absolute;
     content: '';
-    top: 6px;
-    left: 26px;
-    width: 3px;
-    height: 40px;
-    background-color: white;
+    top: 7px;
+    left: 14px;
+    width: 1px;
+    height: 15px;
+    background-color: $last;
   }
 
   &:after {
     position: absolute;
     content: '';
-    top: 25px;
+    top: 14px;
     left: 7px;
-    width: 40px;
-    height: 3px;
-    background-color: white;
+    width: 15px;
+    height: 1px;
+    background-color: $last;
   }
   
   &:hover {
@@ -58,7 +58,8 @@
 }
 
 .team__select:checked ~ label .team {
-  border: 2px solid rgba(0,0,0,0.75);
+  border: 2px solid $last;
+  background-color: $fourth;
 }
 
 @keyframes shadow-drop-center {

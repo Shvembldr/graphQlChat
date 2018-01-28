@@ -21,6 +21,7 @@
   position: relative;
   margin-top: 40px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .form__input {
@@ -70,12 +71,13 @@
   transition: 0.3s;
   z-index: -1;
   letter-spacing: 2px;
+  text-align: center;
 }
 
 .form__submit {
   border: 1px solid $last;
   color: $last;
-  padding: 15px 80px;
+  padding: 15px 0;
   background-color: transparent;
   text-align: center;
   text-decoration: none;
@@ -111,7 +113,14 @@
   opacity: 1;
 }
 
-.form__add-channel .form__add-team {
+.form__add-channel  {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form__add-team {
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -135,4 +144,6 @@
   margin-top: 30px;
   margin-bottom: 20px;
 }
+
+
 

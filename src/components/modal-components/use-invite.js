@@ -16,7 +16,7 @@ const validate = values => {
 };
 
 @AddUserToTeam
-class AddTeam extends Component {
+class UseInvite extends Component {
   static propTypes = {
     addUserToTeam: PropTypes.func,
     hideModal: PropTypes.func,
@@ -41,15 +41,17 @@ class AddTeam extends Component {
             <Field
               name="invite"
               component={Input}
-              placeholder={'Enter your invite'}
+              label={'Enter your invite'}
             />
-            {submitting ? (
-              <Loader />
-            ) : (
-              <button type="submit" className="form__submit">
-                Add Team
-              </button>
-            )}
+            <div className="form__button-container">
+              {submitting ? (
+                <Loader />
+              ) : (
+                <button type="submit" className="form__submit">
+                  Use It
+                </button>
+              )}
+            </div>
           </form>
         )}
       />
@@ -57,4 +59,4 @@ class AddTeam extends Component {
   }
 }
 
-export default connect(null, { hideModal })(AddTeam);
+export default connect(null, { hideModal })(UseInvite);

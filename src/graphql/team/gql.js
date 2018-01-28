@@ -15,3 +15,19 @@ export const ADD_USER_TO_TEAM_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_TEAM_MUTATION = gql`
+  mutation createTeamMutation($input: TeamInput!) {
+    createTeam(input: $input) {
+      id
+      name
+      owner {
+        id
+      }
+      channels {
+        id
+        name
+      }
+    }
+  }
+`;

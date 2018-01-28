@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MessagesQuery } from '../../graphql/message/graphql';
+import format from 'date-fns/format';
 
 @MessagesQuery
 class ChatWindow extends Component {
@@ -40,7 +41,10 @@ class ChatWindow extends Component {
           <div className="chat__window-wrapper">
             {messages.map(message => (
               <div key={`message-${message.id}`} className="message">
-                <div className="message__user">{message.user.name}</div>
+                <div className="message__title">
+                  <div className="message__user">{message.user.name}</div>
+                  <div className="message__time">{format(new Date(message.createdAt), 'HH:mm' )}</div>
+                </div>
                 <div className="message__text">{message.text}</div>
               </div>
             ))}

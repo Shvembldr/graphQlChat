@@ -11,3 +11,18 @@
   font-size: 16px;
   margin-top: 3px;
 }
+
+.message__title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.message__time {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  align-self: flex-end;
+  color: $third;
+}

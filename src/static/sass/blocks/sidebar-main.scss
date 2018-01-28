@@ -4,10 +4,22 @@
   flex-direction: column;
 }
 
+.sidebar-main__team-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .sidebar-main__title {
   font-size: 26px;
   margin-top: 10px;
   margin-left: 30px;
+}
+
+.sidebar-main__members {
+  font-size: 15px;
+  margin-right: 30px;
 }
 
 .sidebar-main__user-container {
@@ -36,11 +48,11 @@
 
 .sidebar-main__invite-button {
   margin-right: 30px;
-  border: 2px solid white;
+  border: 2px solid $last;
   padding: 5px;
   cursor: pointer;
   opacity: 0.6;
-
+  transition: 0.3s ease-in-out;
   &:hover {
     opacity: 1;
   }
@@ -55,5 +67,20 @@
   border: 1px solid black;
   color: black;
   background-color: #5B7272;
+}
+
+.sidebar-main__use-invite {
+  margin-top: auto;
+  margin-bottom: 30px;
+  align-self: center;
+  padding: 10px 20px;
+  border: 2px solid $last;
+  transition: 0.3s ease-in-out;
+  opacity: 0.8;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 1;
+  }
 }
 

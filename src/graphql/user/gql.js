@@ -6,6 +6,10 @@ export const USER_QUERY = gql`
       id
       name
       email
+      invites {
+        id  
+        token
+      }
       teams {
         id
         name

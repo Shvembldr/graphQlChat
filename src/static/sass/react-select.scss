@@ -7,7 +7,7 @@
 */
 .Select {
   position: relative;
-  width: 85%;
+  width: 100%;
 }
 .Select input::-webkit-contacts-auto-fill-button,
 .Select input::-webkit-credentials-auto-fill-button {
@@ -59,7 +59,7 @@
   background: #fff;
 }
 .Select.is-focused:not(.is-open) > .Select-control {
-  border-color: #007eff;
+  border-color: $last;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1);
   background: #fff;
 }
@@ -79,7 +79,7 @@
 .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover,
 .Select.has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus,
 .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {
-  color: #007eff;
+  color: $last;
   outline: none;
   text-decoration: underline;
 }
@@ -100,9 +100,7 @@
 }
 .Select-control {
   background-color: #fff;
-  border-color: #d9d9d9 #ccc #b3b3b3;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid $last;
   color: #333;
   cursor: default;
   display: table;
@@ -121,10 +119,15 @@
   outline: none;
   background: #fff;
 }
+
+.Select-control .Select-input:focus ~ .Select-placeholder {
+  display: none;
+};
+
 .Select-placeholder,
 .Select--single > .Select-control .Select-value {
   bottom: 0;
-  color: #aaa;
+  color: $fourth;
   left: 0;
   line-height: 34px;
   padding-left: 10px;
@@ -135,6 +138,7 @@
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
   white-space: nowrap;
 }
 .Select-input {
@@ -272,8 +276,8 @@
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-top-color: #e6e6e6;
+  border: 1px solid $second;
+  border-top-color: transparent;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
   margin-top: -1px;
@@ -291,7 +295,7 @@
 }
 .Select-option {
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: transparent;
   color: #666666;
   cursor: pointer;
   display: block;
@@ -302,15 +306,13 @@
   border-bottom-left-radius: 4px;
 }
 .Select-option.is-selected {
-  background-color: #f5faff;
+  background-color: $first;
   /* Fallback color for IE 8 */
-  background-color: rgba(0, 126, 255, 0.04);
   color: #333;
 }
 .Select-option.is-focused {
-  background-color: #ebf5ff;
+  background-color: $second;
   /* Fallback color for IE 8 */
-  background-color: rgba(0, 126, 255, 0.08);
   color: #333;
 }
 .Select-option.is-disabled {
@@ -337,14 +339,12 @@
   margin-left: 5px;
 }
 .Select--multi .Select-value {
-  background-color: #ebf5ff;
+  background-color: $first;
   /* Fallback color for IE 8 */
-  background-color: rgba(0, 126, 255, 0.08);
   border-radius: 2px;
-  border: 1px solid #c2e0ff;
   /* Fallback color for IE 8 */
-  border: 1px solid rgba(0, 126, 255, 0.24);
-  color: #007eff;
+  border: 1px solid $last;
+  color: $third;
   display: inline-block;
   font-size: 0.9em;
   line-height: 1.4;
@@ -364,7 +364,7 @@
   padding: 2px 5px;
 }
 .Select--multi a.Select-value-label {
-  color: #007eff;
+  color: $third;
   cursor: pointer;
   text-decoration: none;
 }
@@ -375,22 +375,19 @@
   cursor: pointer;
   border-bottom-left-radius: 2px;
   border-top-left-radius: 2px;
-  border-right: 1px solid #c2e0ff;
+  border-right: 1px solid $last;
   /* Fallback color for IE 8 */
-  border-right: 1px solid rgba(0, 126, 255, 0.24);
   padding: 1px 5px 3px;
 }
 .Select--multi .Select-value-icon:hover,
 .Select--multi .Select-value-icon:focus {
-  background-color: #d8eafd;
+  background-color: $first;
   /* Fallback color for IE 8 */
-  background-color: rgba(0, 113, 230, 0.08);
-  color: #0071e6;
+  color: $last;
 }
 .Select--multi .Select-value-icon:active {
-  background-color: #c2e0ff;
+  background-color: $second;
   /* Fallback color for IE 8 */
-  background-color: rgba(0, 126, 255, 0.24);
 }
 .Select--multi.Select--rtl .Select-value {
   margin-left: 0;
@@ -398,9 +395,8 @@
 }
 .Select--multi.Select--rtl .Select-value-icon {
   border-right: none;
-  border-left: 1px solid #c2e0ff;
+  border-left: 1px solid $last;
   /* Fallback color for IE 8 */
-  border-left: 1px solid rgba(0, 126, 255, 0.24);
 }
 .Select--multi.is-disabled .Select-value {
   background-color: #fcfcfc;

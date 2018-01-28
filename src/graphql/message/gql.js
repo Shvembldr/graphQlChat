@@ -5,6 +5,7 @@ export const MESSAGES_QUERY = gql`
     messages(channelId: $channelId) {
       id
       text
+      createdAt
       user {
         name
       }
@@ -13,10 +14,11 @@ export const MESSAGES_QUERY = gql`
 `;
 
 export const CREATE_MESSAGE_MUTATION = gql`
-  mutation createMessageMutation($input: MessageInput!){
+  mutation createMessageMutation($input: MessageInput!) {
     createMessage(input: $input) {
       id
       text
+      createdAt
       user {
         name
       }
@@ -32,6 +34,7 @@ export const NEW_MESSAGE_SUBSCRIPTION = gql`
     newMessage(channelId: $channelId) {
       id
       text
+      createdAt
       user {
         name
       }

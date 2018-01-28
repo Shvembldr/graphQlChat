@@ -5,10 +5,11 @@
 }
 
 .chat__header {
-  background-color: #BFCACA;
+  background-color: transparent;
   height: 5%;
   min-height: 65px;
   width: 100%;
+  border-bottom: 1px solid $fourth;
 }
 
 .chat__window-wrapper {

@@ -31,8 +31,8 @@ export const UserQuery = graphql(USER_QUERY, {
 });
 
 export const UsersQuery = graphql(USERS_QUERY, {
-  options: ({ teamId }) => ({
-    variables: { teamId },
+  options: ({ selectedTeam }) => ({
+    variables: { teamId: selectedTeam.id },
   }),
   props: ({ data }) => {
     const { error, loading, users } = data;
