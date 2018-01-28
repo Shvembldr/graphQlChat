@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import AddChannelModal from './add-channel-modal';
-import AddUserToTeamModal from './add-user-to-team-modal';
 import { CreateInvite } from '../../graphql/invite/graphql';
+import { connect } from 'react-redux';
+import { showModal } from '../../redux/actions/modal';
+import AddChannel from '../modal-components/add-channel';
+import AddTeam from '../modal-components/add-team';
 
 @CreateInvite
 class Aside extends Component {
@@ -15,38 +17,43 @@ class Aside extends Component {
     selectChannel: PropTypes.func,
     publicChannels: PropTypes.arrayOf(PropTypes.object),
     createInvite: PropTypes.func,
-    addUserToTeam: PropTypes.func
+    addUserToTeam: PropTypes.func,
+    showModal: PropTypes.func,
   };
 
   state = {
-    modalOpen: false,
-  };
-
-  openModal = () => {
-    this.setState({
-      modalOpen: true,
-    });
-  };
-
-  closeModal = () => {
-    this.setState({
-      modalOpen: false,
-      invite: null,
-    });
+    invite: null,
   };
 
   getInvite = async () => {
-    const { data: { createInvite: { token }}} = await this.props.createInvite({
-      teamId: this.props.selectedTeam.id,
-    });
+    const { data: { createInvite: { token } } } = await this.props.createInvite(
+      {
+        teamId: this.props.selectedTeam.id,
+      },
+    );
     this.setState({
-      invite: token
+      invite: token,
     });
     setTimeout(() => {
       this.setState({
-        invite: null
-      })
-    }, 5000)
+        invite: null,
+      });
+    }, 5000);
+  };
+
+  addChannel = () => {
+    const modalComponent = (
+      <AddChannel
+        currentUserId={this.props.user.id}
+        teamId={this.props.selectedTeam.id}
+      />
+    );
+    this.props.showModal(modalComponent);
+  };
+
+  addTeam = () => {
+    const modalComponent = <AddTeam currentUserId={this.props.user.id} />;
+    this.props.showModal(modalComponent)
   };
 
   render() {
@@ -78,7 +85,7 @@ class Aside extends Component {
                 </label>
               </li>
             ))}
-            <li key="new_team" className="team__new"/>
+            <li key="new_team" className="team__new" onClick={this.addTeam} />
           </ul>
           <div className="aside__main sidebar-main">
             <h1 className="sidebar-main__title">{selectedTeam.name}</h1>
@@ -99,7 +106,10 @@ class Aside extends Component {
             <ul className="sidebar-main__channels channels">
               <div className="channels__title">
                 <h3>Каналы</h3>
-                <div className="channels__add-channel" onClick={this.openModal}>
+                <div
+                  className="channels__add-channel"
+                  onClick={this.addChannel}
+                >
                   +
                 </div>
               </div>
@@ -130,15 +140,9 @@ class Aside extends Component {
             </ul>
           </div>
         </aside>
-        <AddChannelModal
-          open={this.state.modalOpen}
-          teamId={selectedTeam.id}
-          onClose={this.closeModal}
-          currentUserId={user.id}
-        />
       </Fragment>
     );
   }
 }
 
-export default Aside;
+export default connect(null, { showModal })(Aside);

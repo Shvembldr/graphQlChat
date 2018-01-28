@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 class FormSelect extends Component {
   static propTypes = {
-    options: PropTypes.arrayOf(PropTypes.object)
+    options: PropTypes.arrayOf(PropTypes.object),
   };
 
   state = {
-    value: ''
+    value: '',
   };
 
-  handleSelectChange = (value) => {
+  handleSelectChange = value => {
     this.setState({ value });
     this.props.input.onChange(value.split(',').map(id => parseInt(id, 10)));
   };
@@ -19,9 +19,10 @@ class FormSelect extends Component {
   render() {
     const { input, meta, options, ...rest } = this.props;
     return (
+      <Fragment>
         <Select
           style={{
-            width: `100%`
+            width: `100%`,
           }}
           multi
           onChange={this.handleSelectChange}
@@ -33,7 +34,9 @@ class FormSelect extends Component {
           value={this.state.value}
           {...rest}
         />
-   );
+        {meta.touched && <div className="form__error">{meta.error}</div>}
+      </Fragment>
+    );
   }
 }
 
