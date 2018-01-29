@@ -119,7 +119,7 @@ class Aside extends Component {
               </div>
               <ul className="sidebar-main__channels channels">
                 <div className="channels__title">
-                  <h3>Каналы</h3>
+                  <h3>Channels</h3>
                   <div
                     className="channels__add-channel"
                     onClick={this.addChannel}

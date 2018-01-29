@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createMessageMutation } from '../../graphql/message/graphql';
+import debounce from 'lodash/debounce';
 
 const ENTER_KEY = 13;
 
@@ -12,8 +13,18 @@ class ChatInput extends Component {
     userId: PropTypes.number,
   };
 
+  componentWillMount = () => {
+    this.sendMessage = debounce(this.sendMessage, 200);
+  };
+
   state = {
     input: '',
+  };
+
+  onKeyDown = e => {
+    if (e.keyCode === ENTER_KEY) {
+      this.sendMessage();
+    }
   };
 
   handleChange = e => {
@@ -32,10 +43,10 @@ class ChatInput extends Component {
         });
         this.input.value = '';
         this.setState({
-          input: ''
-        })
+          input: '',
+        });
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     }
   };
@@ -45,12 +56,8 @@ class ChatInput extends Component {
       <div className="chat__input input">
         <div className="input__wrapper">
           <input
-            onKeyDown={(e) => {
-              if (e.keyCode === ENTER_KEY) {
-                this.sendMessage();
-              }
-            }}
-            ref={e => this.input = e}
+            onKeyDown={this.onKeyDown}
+            ref={e => (this.input = e)}
             type="textarea"
             className="input__area"
             onChange={this.handleChange}

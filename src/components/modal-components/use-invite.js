@@ -7,6 +7,7 @@ import { hideModal } from '../../redux/actions/modal';
 import { Form, Field } from 'react-final-form';
 import Loader from '../common/loader';
 
+
 const validate = values => {
   const errors = {};
   if (!values.invite) {

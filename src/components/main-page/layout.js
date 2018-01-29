@@ -41,7 +41,7 @@ class Layout extends Component {
           selectChannel={this.selectChannel}
         />
         <section className="chat">
-          <ChatHeader/>
+          <ChatHeader user={user} channel={selectedChannel} userId={user.id}/>
           <ChatWindow channelId={selectedChannel.id} />
           <ChatInput channelId={selectedChannel.id} userId={user.id} />
         </section>

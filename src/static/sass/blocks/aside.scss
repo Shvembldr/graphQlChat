@@ -18,6 +18,7 @@
   flex-direction: row;
   color: $last;
   transition: 0.3s ease-in-out;
+  z-index: 500;
 }
 
 .aside-hidden {

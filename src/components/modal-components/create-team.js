@@ -13,6 +13,10 @@ const validate = values => {
   if (!values.teamName) {
     errors.teamName = 'Required';
   }
+
+  if (values.teamName && values.teamName.length > 15) {
+    errors.teamName = '15 symbols is max for team name'
+  }
   return errors;
 };
 
@@ -28,7 +32,7 @@ class CreateTeam extends Component {
   onSubmit = async values => {
     await this.props.createTeam({
       name: values.teamName,
-      members: [...values.users],
+      members: values.users && [...values.users],
       owner: this.props.currentUserId,
     });
     this.props.hideModal();

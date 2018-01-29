@@ -25,3 +25,51 @@
   cursor: pointer;
   background-color: $second;
 }
+
+.header__channel-name {
+  font-size: 20px;
+  position: relative;
+  cursor: pointer;
+  font-weight: bold;
+  padding-left: 40px;
+  display: flex;
+  align-items: center;
+
+
+  &:before {
+    position: absolute;
+    content: '#';
+    left: 30px;
+    top: 0;
+  }
+}
+
+.header__notifications {
+  @include respond-to($mobile) {
+    display: none;
+  }
+
+  @include respond-to($desktop) {
+    display: inline;
+  }
+
+  margin-left: 100px;
+  font-size: 20px;
+  color: #5B7272;
+}
+
+.header__notifications--blur-out{
+  animation: blur-out-expand 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  margin-left: 100px;
+  font-size: 20px;
+  color: #5B7272;
+}
+
+@-webkit-keyframes blur-out-expand {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

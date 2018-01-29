@@ -13,6 +13,10 @@ const validate = values => {
   if (!values.channelName) {
     errors.channelName = 'Required';
   }
+
+  if (values.channelName && values.channelName.length > 15) {
+    errors.channelName = '15 symbols is max for channel name'
+  }
   if (!values.users) {
     errors.users = 'Required';
   }
