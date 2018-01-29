@@ -8,6 +8,7 @@ import CreateTeam from '../modal-components/create-team';
 import Invites from '../modal-components/invites';
 import UseInvite from '../modal-components/use-invite';
 import { UsersQuery } from '../../graphql/user/graphql';
+import { hideSidebar } from '../../redux/actions/sidebar';
 
 @UsersQuery
 class Aside extends Component {
@@ -21,6 +22,8 @@ class Aside extends Component {
     addUserToTeam: PropTypes.func,
     showModal: PropTypes.func,
     users: PropTypes.arrayOf(PropTypes.object),
+    isVisible: PropTypes.bool,
+    hideSidebar: PropTypes.func,
   };
 
   addChannel = () => {
@@ -64,11 +67,13 @@ class Aside extends Component {
       selectedChannel,
       selectTeam,
       selectChannel,
+      isVisible,
+      hideSidebar,
     } = this.props;
     return (
       users && (
         <Fragment>
-          <aside className="aside">
+          <aside className={isVisible ? 'aside' : 'aside aside-hidden'}>
             <ul className="aside__teams sidebar-teams">
               {user.teams.map(team => (
                 <li key={`team-${team.id}`}>
@@ -96,7 +101,10 @@ class Aside extends Component {
             <div className="aside__main sidebar-main">
               <div className="sidebar-main__team-container">
                 <h1 className="sidebar-main__title">{selectedTeam.name}</h1>
-                <p className="sidebar-main__members">{users.length} members</p>
+                <div
+                  className="sidebar-main__hide-sidebar"
+                  onClick={hideSidebar}
+                />
               </div>
               <div className="sidebar-main__user-container">
                 <div className="sidebar-main__user">{user.name}</div>
@@ -158,4 +166,9 @@ class Aside extends Component {
   }
 }
 
-export default connect(null, { showModal })(Aside);
+export default connect(
+  state => ({
+    isVisible: state.sidebar.isVisible,
+  }),
+  { showModal, hideSidebar },
+)(Aside);

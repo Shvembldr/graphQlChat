@@ -1,17 +1,35 @@
 .aside {
+  @include respond-to($mobile) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 320px;
+  }
+
+  @include respond-to($desktop) {
+    position: relative;
+  }
+
   height: 100%;
   background-color: $second;
-  width: 20%;
+  width: 30%;
   min-width: 400px;
   display: flex;
   flex-direction: row;
   color: $last;
+  transition: 0.3s ease-in-out;
+}
+
+.aside-hidden {
+  @include respond-to($mobile) {
+    left: -400px;
+  }
 }
 
 .aside__teams {
   background-color: $third;
   width: 30%;
-  min-width: 100px;
+  min-width: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;

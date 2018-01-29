@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Aside from './aside';
 import ChatWindow from './chat-window';
 import ChatInput from './chat-input';
+import ChatHeader from "./chat-header";
 
 class Layout extends Component {
   static propTypes = {
@@ -19,14 +20,12 @@ class Layout extends Component {
       selectedTeam: team,
       selectedChannel: team.channels[0],
     });
-    console.log(this.state);
   };
 
   selectChannel = channel => {
     this.setState({
       selectedChannel: channel,
     });
-    console.log(this.state);
   };
 
   render() {
@@ -42,7 +41,7 @@ class Layout extends Component {
           selectChannel={this.selectChannel}
         />
         <section className="chat">
-          <header className="chat__header" />
+          <ChatHeader/>
           <ChatWindow channelId={selectedChannel.id} />
           <ChatInput channelId={selectedChannel.id} userId={user.id} />
         </section>

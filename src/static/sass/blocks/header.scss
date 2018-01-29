@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: transparent;
+  height: 5%;
+  min-height: 65px;
+  width: 100%;
+  border-bottom: 1px solid $fourth;
+}
+
+.header__show-sidebar {
+  @include respond-to($mobile) {
+    display: block;
+  }
+
+  @include respond-to($desktop) {
+    display: none;
+  }
+
+  width: 60px;
+  height: 40px;
+  border: 1px solid $last;
+  margin-left: 20px;
+  cursor: pointer;
+  background-color: $second;
+}

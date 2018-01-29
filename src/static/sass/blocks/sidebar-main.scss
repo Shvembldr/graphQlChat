@@ -42,7 +42,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #5B7272;
+    background-color: #5b7272;
   }
 }
 
@@ -66,7 +66,7 @@
   left: 500px;
   border: 1px solid black;
   color: black;
-  background-color: #5B7272;
+  background-color: #5b7272;
 }
 
 .sidebar-main__use-invite {
@@ -78,9 +78,48 @@
   transition: 0.3s ease-in-out;
   opacity: 0.8;
   cursor: pointer;
-  
+
   &:hover {
     opacity: 1;
   }
 }
 
+.sidebar-main__hide-sidebar {
+  @include respond-to($mobile) {
+    display: block;
+  }
+
+  @include respond-to($desktop) {
+    display: none;
+  }
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  margin-right: 15px;
+  &:hover {
+    &::before,
+    &::after {
+      background: $fourth;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: $last;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+}

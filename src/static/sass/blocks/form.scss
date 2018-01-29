@@ -113,15 +113,14 @@
   opacity: 1;
 }
 
-.form__add-channel  {
-  width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+.form__add-channel, .form__add-team  {
+  @include respond-to($mobile) {
+    max-width: 320px;
+  }
 
-.form__add-team {
-  width: 400px;
+  @include respond-to($desktop) {
+    width: 400px;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
