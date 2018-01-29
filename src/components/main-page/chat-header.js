@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { showSidebar } from '../../redux/actions/sidebar';
 import { NotificationsQuery } from '../../graphql/notifications/graphql';
-import { TransitionGroup } from 'react-transition-group';
 import Typist from 'react-typist';
 
 @NotificationsQuery
