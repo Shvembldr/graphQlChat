@@ -70,7 +70,7 @@ class ChatHeader extends Component {
   render() {
     const { showSidebar, user, channel, notifications } = this.props;
     return (
-      notifications && (
+      (
         <header className="chat__header header" onClick={this.onClick}>
           <div className="hamburger" onClick={showSidebar}>
             <div className="hamburger__stripe" />
@@ -93,7 +93,7 @@ class ChatHeader extends Component {
                   element: '_',
                 }}
               >
-                {notifications.length > 0
+                {notifications && notifications.length > 0
                   ? notifications[notifications.length - 1].text
                   : `Hello, ${user.name}!`}
               </Typist>

@@ -17,7 +17,7 @@ const Input = ({ input, meta, label, ...rest }) => {
           !meta.touched ? 'form__error' : 'form__error form__error--visible'
         }
       >
-        {meta.error}
+        {meta.error || meta.submitError}
       </div>
     </div>
   );

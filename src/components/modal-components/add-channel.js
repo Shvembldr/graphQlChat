@@ -7,13 +7,13 @@ import { Form, Field } from 'react-final-form';
 import Loader from '../common/loader';
 import { hideModal } from '../../redux/actions/modal';
 import {connect} from "react-redux";
+import {FORM_ERROR} from "final-form";
 
 const validate = values => {
   const errors = {};
   if (!values.channelName) {
     errors.channelName = 'Required';
   }
-
   if (values.channelName && values.channelName.length > 15) {
     errors.channelName = '15 symbols is max for channel name'
   }
@@ -34,12 +34,19 @@ class AddChannel extends Component {
   };
 
   onSubmit = async values => {
-    await this.props.createPrivateChannel({
-      name: values.channelName,
-      users: [...values.users, this.props.currentUserId],
-      teamId: this.props.teamId,
-    });
-    this.props.hideModal();
+    try {
+      await this.props.createPrivateChannel({
+        name: values.channelName,
+        users: [...values.users, this.props.currentUserId],
+        teamId: this.props.teamId,
+      });
+      this.props.hideModal();
+    } catch (err) {
+      switch(err.toString()) {
+        default:
+          return { [FORM_ERROR]: "Something goes wrong..." };
+      }
+    }
   };
 
   render() {
@@ -51,7 +58,7 @@ class AddChannel extends Component {
       <Form
         onSubmit={this.onSubmit}
         validate={validate}
-        render={({ handleSubmit, reset, submitting, pristine, values }) => (
+        render={({ handleSubmit, reset, submitting, submitError }) => (
           <form className="form__add-channel" onSubmit={handleSubmit}>
             <Field name="channelName" component={Input} label={'name'} />
             <Field
@@ -60,6 +67,9 @@ class AddChannel extends Component {
               options={options}
               placeholder={'add users'}
             />
+            <div className="form__error form__error--full">
+              {submitError}
+            </div>
             <div className="form__button-container">
               {submitting ? (
                 <Loader />

@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 import LoginForm from '../login-form';
 import { LoginMutation } from '../../graphql/user/graphql';
 import history from './../../history';
+import {FORM_ERROR} from "final-form";
 
 @LoginMutation
 class LoginPage extends Component {
   static propTypes = {
     login: PropTypes.func
-  };
-
-  state = {
-    error: null,
   };
 
   onSubmit = async ({ email, password }) => {
@@ -26,9 +23,14 @@ class LoginPage extends Component {
       localStorage.setItem('x-refresh-token', refreshToken);
       history.push('/');
     } catch (err) {
-      this.setState({
-        error: err.message,
-      });
+      switch(err.toString()) {
+        case 'Error: GraphQL error: User does not exist':
+          return { email: "User does not exist" };
+        case 'Error: GraphQL error: Wrong password':
+          return { password: "Wrong password" };
+        default:
+          return { [FORM_ERROR]: "Login failed" };
+      }
     }
   };
 
@@ -36,7 +38,6 @@ class LoginPage extends Component {
     return (
       <Fragment>
         <LoginForm onSubmit={this.onSubmit} />
-        {this.state.error && <h3>{this.state.error}</h3>}
       </Fragment>
     );
   }

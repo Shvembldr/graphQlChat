@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createMessageMutation } from '../../graphql/message/graphql';
-import debounce from 'lodash/debounce';
 
 const ENTER_KEY = 13;
 
@@ -13,16 +12,13 @@ class ChatInput extends Component {
     userId: PropTypes.number,
   };
 
-  componentWillMount = () => {
-    this.sendMessage = debounce(this.sendMessage, 200);
-  };
-
   state = {
     input: '',
+    submitting: false,
   };
 
   onKeyDown = e => {
-    if (e.keyCode === ENTER_KEY) {
+    if (e.keyCode === ENTER_KEY && !this.state.submitting) {
       this.sendMessage();
     }
   };
@@ -36,6 +32,9 @@ class ChatInput extends Component {
   sendMessage = async () => {
     if (this.state.input) {
       try {
+        this.setState({
+          submitting: true,
+        });
         await this.props.createMessage({
           channelId: this.props.channelId,
           text: this.state.input,
@@ -44,6 +43,7 @@ class ChatInput extends Component {
         this.input.value = '';
         this.setState({
           input: '',
+          submitting: false
         });
       } catch (err) {
         console.log(err);

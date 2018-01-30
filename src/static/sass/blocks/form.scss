@@ -122,6 +122,12 @@
   opacity: 1;
 }
 
+.form__error--full {
+  bottom: 25px;
+  opacity: 1;
+  font-size: 14px;
+}
+
 .form__add-channel, .form__add-team  {
   @include respond-to($mobile) {
     max-width: 320px;

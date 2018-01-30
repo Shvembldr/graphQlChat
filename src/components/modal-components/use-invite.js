@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { hideModal } from '../../redux/actions/modal';
 import { Form, Field } from 'react-final-form';
 import Loader from '../common/loader';
+import {FORM_ERROR} from "final-form";
 
 
 const validate = values => {
@@ -25,11 +26,26 @@ class UseInvite extends Component {
   };
 
   onSubmit = async ({ invite }) => {
-    await this.props.addUserToTeam({
-      invite,
-      userId: this.props.currentUserId,
-    });
-    this.props.hideModal();
+    try {
+      await this.props.addUserToTeam({
+        invite,
+        userId: this.props.currentUserId,
+      });
+      this.props.hideModal();
+    } catch (err) {
+      switch(err.toString()) {
+        case 'Error: GraphQL error: jwt malformed':
+          return { invite: "Your invite is invalid" };
+        case 'Error: GraphQL error: jwt expired':
+          return { invite: "Your invite is expired" };
+        case 'Error: GraphQL error: You can not use your own invite':
+          return { invite: "You can not use your own invite" };
+        case 'Error: GraphQL error: You already are member of this team':
+          return { invite: "You already are member of this team" };
+        default:
+          return { [FORM_ERROR]: "Something goes wrong..." };
+      }
+    }
   };
 
   render() {
@@ -37,13 +53,16 @@ class UseInvite extends Component {
       <Form
         onSubmit={this.onSubmit}
         validate={validate}
-        render={({ handleSubmit, reset, submitting, pristine, values }) => (
+        render={({ handleSubmit, reset, submitting, submitError }) => (
           <form className="form__add-team" onSubmit={handleSubmit}>
             <Field
               name="invite"
               component={Input}
               label={'Enter your invite'}
             />
+            <div className="form__error form__error--full">
+              {submitError}
+            </div>
             <div className="form__button-container">
               {submitting ? (
                 <Loader />

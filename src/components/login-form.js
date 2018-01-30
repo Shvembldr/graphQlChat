@@ -24,15 +24,20 @@ const LoginForm = ({ onSubmit }) => {
           <Form
             onSubmit={onSubmit}
             validate={validate}
-            render={({ handleSubmit, reset, submitting, pristine, values }) => (
+            render={({ handleSubmit, reset, submitting, submitError }) => (
               <form onSubmit={handleSubmit}>
-                <Field name="email" component={Input} label={'email'} />
+                <Field name="email" type='email' component={Input} label={'email'} />
                 <Field
                   type="password"
                   name="password"
                   component={Input}
                   label={'password'}
                 />
+                {submitError && (
+                  <div className="form__error form__error--full">
+                    {submitError}
+                  </div>
+                )}
                 <div className="form__button-container">
                   {submitting ? (
                     <Loader />

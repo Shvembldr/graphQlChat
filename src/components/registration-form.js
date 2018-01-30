@@ -12,20 +12,20 @@ const RegistrationForm = ({ onSubmit, user }) => {
       errors.name = 'Required';
     }
     if (values.name && values.name.length < 3) {
-      errors.name = 'Имя должно быть больше 3 символов';
+      errors.name = 'Name length must be more than 3 symbols';
     }
     if (!values.password) {
       errors.password = 'Required';
     }
     if (values.password && values.password.length < 8) {
-      errors.password = 'Пароль должен быть больше 8 символов';
+      errors.password = 'Name length must be more than 8 symbols';
     }
     if (!values.password2) {
       errors.password2 = 'Required';
     }
 
     if (values.password !== values.password2) {
-      errors.password2 = 'Пароли не совпадают';
+      errors.password2 = 'Does not match!';
     }
 
     if (!values.email) {
@@ -46,11 +46,11 @@ const RegistrationForm = ({ onSubmit, user }) => {
           <Form
             onSubmit={onSubmit}
             validate={validate}
-            render={({ handleSubmit, reset, submitting }) => (
+            render={({ handleSubmit, reset, submitting, submitError }) => (
               <form onSubmit={handleSubmit}>
                 <Fragment>
                   <Field name="name" component={Input} label={'name'} />
-                  <Field name="email" component={Input} label={'email'} />
+                  <Field name="email" type='email' component={Input} label={'email'} />
                   <Field
                     type="password"
                     name="password"
@@ -69,6 +69,11 @@ const RegistrationForm = ({ onSubmit, user }) => {
                     label={'your invite'}
                   />
                 </Fragment>
+                {submitError && (
+                  <div className="form__error form__error--full">
+                    {submitError}
+                  </div>
+                )}
                 <div className="form__button-container">
                   {submitting ? (
                     <Loader />

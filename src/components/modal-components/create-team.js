@@ -7,6 +7,7 @@ import Loader from '../common/loader';
 import { hideModal } from '../../redux/actions/modal';
 import {connect} from "react-redux";
 import {CreateTeamMutation} from "../../graphql/team/graphql";
+import {FORM_ERROR} from "final-form";
 
 const validate = values => {
   const errors = {};
@@ -30,12 +31,21 @@ class CreateTeam extends Component {
   };
 
   onSubmit = async values => {
-    await this.props.createTeam({
-      name: values.teamName,
-      members: values.users && [...values.users],
-      owner: this.props.currentUserId,
-    });
-    this.props.hideModal();
+    try {
+      await this.props.createTeam({
+        name: values.teamName,
+        members: values.users && [...values.users],
+        owner: this.props.currentUserId,
+      });
+      this.props.hideModal();
+    } catch (err) {
+      switch(err.toString()) {
+        case 'Error: GraphQL error: Team with this name already exists':
+          return { teamName: "Team with this name already exists" };
+        default:
+          return { [FORM_ERROR]: "Something goes wrong..." };
+      }
+    }
   };
 
   render() {
@@ -47,7 +57,7 @@ class CreateTeam extends Component {
       <Form
         onSubmit={this.onSubmit}
         validate={validate}
-        render={({ handleSubmit, reset, submitting, pristine, values }) => (
+        render={({ handleSubmit, reset, submitting, submitError }) => (
           <form className="form__add-channel" onSubmit={handleSubmit}>
             <Field name="teamName" component={Input} label={'team name'} />
             <Field
@@ -56,6 +66,9 @@ class CreateTeam extends Component {
               options={options}
               placeholder={'add users'}
             />
+            <div className="form__error form__error--full">
+              {submitError}
+            </div>
             <div className="form__button-container">
               {submitting ? (
                 <Loader />
