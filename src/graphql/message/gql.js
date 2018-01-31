@@ -5,6 +5,8 @@ export const MESSAGES_QUERY = gql`
     messages(channelId: $channelId) {
       id
       text
+      url
+      fileType
       createdAt
       user {
         name
@@ -14,11 +16,13 @@ export const MESSAGES_QUERY = gql`
 `;
 
 export const CREATE_MESSAGE_MUTATION = gql`
-  mutation createMessageMutation($input: MessageInput!) {
-    createMessage(input: $input) {
+  mutation createMessageMutation($input: MessageInput!, $file: File) {
+    createMessage(input: $input, file: $file) {
       id
       text
       createdAt
+      url
+      fileType
       user {
         name
       }
@@ -35,9 +39,13 @@ export const NEW_MESSAGE_SUBSCRIPTION = gql`
       id
       text
       createdAt
+      url
+      fileType
       user {
         name
       }
     }
   }
 `;
+
+

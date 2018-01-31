@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MessagesQuery } from '../../graphql/message/graphql';
 import format from 'date-fns/format';
+import ChatFileUpload from './chat-file-upload';
+import Message from "./message";
 
 @MessagesQuery
 class ChatWindow extends Component {
@@ -11,6 +13,7 @@ class ChatWindow extends Component {
     error: PropTypes.object,
     messages: PropTypes.arrayOf(PropTypes.object),
     subscribeToNewMessages: PropTypes.func,
+    userId: PropTypes.number,
   };
 
   componentWillMount() {
@@ -20,7 +23,6 @@ class ChatWindow extends Component {
   componentWillReceiveProps({ channelId }) {
     if (this.props.channelId !== channelId) {
       if (this.unsubscribe) {
-
         this.unsubscribe();
       }
       this.unsubscribe = this.props.subscribeToNewMessages(channelId);
@@ -34,22 +36,24 @@ class ChatWindow extends Component {
   }
 
   render() {
-    const { messages } = this.props;
+    const { messages, channelId, userId } = this.props;
     return (
       messages && (
-        <div className="chat__window">
+        <ChatFileUpload channelId={channelId} userId={userId}>
           <div className="chat__window-wrapper">
             {messages.map(message => (
               <div key={`message-${message.id}`} className="message">
                 <div className="message__title">
                   <div className="message__user">{message.user.name}</div>
-                  <div className="message__time">{format(new Date(message.createdAt), 'HH:mm' )}</div>
+                  <div className="message__time">
+                    {format(new Date(message.createdAt), 'HH:mm')}
+                  </div>
                 </div>
-                <div className="message__text">{message.text}</div>
+                <Message message={message} />
               </div>
             ))}
           </div>
-        </div>
+        </ChatFileUpload>
       )
     );
   }

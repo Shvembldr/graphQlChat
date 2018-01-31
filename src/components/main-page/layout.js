@@ -42,7 +42,7 @@ class Layout extends Component {
         />
         <section className="chat">
           <ChatHeader user={user} channel={selectedChannel} userId={user.id}/>
-          <ChatWindow channelId={selectedChannel.id} />
+          <ChatWindow channelId={selectedChannel.id} userId={user.id}/>
           <ChatInput channelId={selectedChannel.id} userId={user.id} />
         </section>
       </main>

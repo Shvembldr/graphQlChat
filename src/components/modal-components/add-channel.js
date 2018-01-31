@@ -44,7 +44,7 @@ class AddChannel extends Component {
     } catch (err) {
       switch(err.toString()) {
         default:
-          return { [FORM_ERROR]: "Something goes wrong..." };
+          return { [FORM_ERROR]: "Something went wrong..." };
       }
     }
   };

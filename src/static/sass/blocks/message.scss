@@ -12,6 +12,16 @@
   margin-top: 3px;
 }
 
+.message__image {
+  max-width: 400px;
+  max-height: 200px;
+  margin: 10px 0;
+}
+
+.message__audio {
+  margin-top: 10px;
+}
+
 .message__title {
   display: flex;
   flex-direction: row;

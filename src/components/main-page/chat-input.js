@@ -55,11 +55,12 @@ class ChatInput extends Component {
     return (
       <div className="chat__input input">
         <div className="input__wrapper">
-          <input
+          <textarea
             onKeyDown={this.onKeyDown}
             ref={e => (this.input = e)}
-            type="textarea"
             className="input__area"
+            rows="1"
+            maxLength="1000"
             onChange={this.handleChange}
           />
         </div>

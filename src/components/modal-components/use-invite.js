@@ -43,7 +43,7 @@ class UseInvite extends Component {
         case 'Error: GraphQL error: You already are member of this team':
           return { invite: "You already are member of this team" };
         default:
-          return { [FORM_ERROR]: "Something goes wrong..." };
+          return { [FORM_ERROR]: "Something went wrong..." };
       }
     }
   };

@@ -43,7 +43,7 @@ class CreateTeam extends Component {
         case 'Error: GraphQL error: Team with this name already exists':
           return { teamName: "Team with this name already exists" };
         default:
-          return { [FORM_ERROR]: "Something goes wrong..." };
+          return { [FORM_ERROR]: "Something went wrong..." };
       }
     }
   };

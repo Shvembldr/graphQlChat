@@ -1,10 +1,11 @@
 import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
+// import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
+import createFileLink from './create-file-link';
 
 const token = localStorage.getItem('x-token');
 const refreshToken = localStorage.getItem('x-refresh-token');
@@ -18,7 +19,6 @@ const serverUri =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:4000/graphql'
     : 'https://graphql-chat-server.herokuapp.com/graphql';
-
 
 const wsLink = new WebSocketLink({
   uri: socketUri,
@@ -43,7 +43,8 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const httpLink = new HttpLink({ uri: serverUri });
+const httpLink = createFileLink({ uri: serverUri });
+
 const httpLinkWithAuth = authLink.concat(httpLink);
 
 const link = split(
