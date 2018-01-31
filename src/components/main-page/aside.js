@@ -7,6 +7,7 @@ import AddChannel from '../modal-components/add-channel';
 import CreateTeam from '../modal-components/create-team';
 import Invites from '../modal-components/invites';
 import UseInvite from '../modal-components/use-invite';
+import Profile from '../modal-components/profile';
 import { UsersQuery } from '../../graphql/user/graphql';
 import { hideSidebar } from '../../redux/actions/sidebar';
 
@@ -59,6 +60,10 @@ class Aside extends Component {
     this.props.showModal(modalComponent);
   };
 
+  showProfile = () => {
+    this.props.showModal(<Profile/>);
+  };
+
   render() {
     const {
       user,
@@ -107,7 +112,9 @@ class Aside extends Component {
                 />
               </div>
               <div className="sidebar-main__user-container">
-                <div className="sidebar-main__user">{user.name}</div>
+                <div className="sidebar-main__user" onClick={this.showProfile}>
+                  {user.name}
+                </div>
                 {user.id === selectedTeam.owner.id && (
                   <div
                     className="sidebar-main__invite-button"

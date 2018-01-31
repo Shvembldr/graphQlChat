@@ -9,7 +9,7 @@ import { FORM_ERROR } from 'final-form';
 import { createMessageMutation } from '../../graphql/message/graphql';
 
 @createMessageMutation
-class DropFile extends Component {
+class ChatDropFile extends Component {
   static propTypes = {
     channelId: PropTypes.number,
     userId: PropTypes.number,
@@ -18,6 +18,15 @@ class DropFile extends Component {
   };
 
   onSubmit = async values => {
+    if (this.props.file.size > 5000000) {
+      return { [FORM_ERROR]: 'you can not upload files more than 5 mb' };
+    }
+
+    if (!this.props.file.type.startsWith('image/')) {
+      return {
+        [FORM_ERROR]: 'Sorry, only image files for now',
+      };
+    }
     try {
       await this.props.createMessage(
         {
@@ -74,4 +83,4 @@ class DropFile extends Component {
   }
 }
 
-export default connect(null, { hideModal })(DropFile);
+export default connect(null, { hideModal })(ChatDropFile);

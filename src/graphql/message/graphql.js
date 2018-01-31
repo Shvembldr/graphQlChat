@@ -40,10 +40,14 @@ export const MessagesQuery = graphql(MESSAGES_QUERY, {
 
 export const createMessageMutation = graphql(CREATE_MESSAGE_MUTATION, {
   props: ({ mutate }) => ({
-    createMessage: ({ channelId, text, userId}, file ) =>
-      mutate({
-        variables: { input: { channelId, text, userId }, file },
-      }),
+    createMessage: ({ channelId, text, userId }, file) =>
+      file
+        ? mutate({
+            variables: { input: { channelId, text, userId }, file },
+          })
+        : mutate({
+            variables: { input: { channelId, text, userId } },
+          }),
   }),
 
   // options: {
@@ -65,4 +69,3 @@ export const createMessageMutation = graphql(CREATE_MESSAGE_MUTATION, {
   //   },
   // },
 });
-

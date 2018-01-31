@@ -1,13 +1,15 @@
 import React from 'react';
 
-const Input = ({ input, meta, label, ...rest }) => {
+const Input = ({ input, meta, label, defaultValue, ...rest }) => {
   return (
     <div className="form__input-container">
       <input
-        className={input.value ? 'form__input has-content' : 'form__input'}
+        className={input.value || defaultValue ? 'form__input has-content' : 'form__input'}
         onBlur={input.onBlur}
         onFocus={input.onFocus}
         onChange={input.onChange}
+        defaultValue={defaultValue}
+
         {...rest}
       />
       <label>{label}</label>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 
-import DropFile from '../modal-components/drop-file'
+import ChatDropFile from '../modal-components/chat-drop-file'
 import {connect} from "react-redux";
 import {showModal} from "../../redux/actions/modal";
 
@@ -14,7 +14,7 @@ class ChatFileUpload extends Component {
   };
 
   sendFile = async ([file]) => {
-    const modalComponent = <DropFile
+    const modalComponent = <ChatDropFile
       channelId={this.props.channelId}
       userId={this.props.userId}
       file={file}

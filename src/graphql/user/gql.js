@@ -6,6 +6,7 @@ export const USER_QUERY = gql`
       id
       name
       email
+      avatar
       invites {
         id  
         token
@@ -32,6 +33,15 @@ export const USER_QUERY = gql`
   }
 `;
 
+export const USER_AVATAR_QUERY = gql`
+query userQuery {
+    me {
+      name
+      avatar
+    }
+  }
+`;
+
 export const USERS_QUERY = gql`
   query usersQuery($teamId: Int!) {
     users(teamId: $teamId) {
@@ -54,6 +64,22 @@ export const LOGIN_MUTATION = gql`
     login(input: $input) {
       token
       refreshToken
+    }
+  }
+`;
+
+export const UPDATE_USER_NAME_MUTATION = gql`
+  mutation updateUserNameMutation($name: String!){
+    updateUserName(name: $name) {
+      name
+    }
+  }
+`;
+
+export const UPDATE_USER_AVATAR_MUTATION = gql`
+  mutation updateUserAvatarMutation($file: File!){
+    updateUserAvatar(file: $file) {
+      avatar
     }
   }
 `;

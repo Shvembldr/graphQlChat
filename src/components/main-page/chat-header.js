@@ -64,7 +64,7 @@ class ChatHeader extends Component {
       this.setState({
         blurredOut: true,
       });
-    }, 5000);
+    }, 3000);
   };
 
   render() {

@@ -19,6 +19,7 @@ class ChatInput extends Component {
 
   onKeyDown = e => {
     if (e.keyCode === ENTER_KEY && !this.state.submitting) {
+      e.preventDefault();
       this.sendMessage();
     }
   };

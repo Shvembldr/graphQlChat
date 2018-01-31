@@ -6,19 +6,10 @@ import { split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import createFileLink from './create-file-link';
+import {serverUriGraphQl, socketUri} from "./constants";
 
 const token = localStorage.getItem('x-token');
 const refreshToken = localStorage.getItem('x-refresh-token');
-
-const socketUri =
-  process.env.NODE_ENV === 'development'
-    ? 'ws://localhost:4000/subscriptions'
-    : 'wss://graphql-chat-server.herokuapp.com/subscriptions';
-
-const serverUri =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:4000/graphql'
-    : 'https://graphql-chat-server.herokuapp.com/graphql';
 
 const wsLink = new WebSocketLink({
   uri: socketUri,
@@ -43,7 +34,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const httpLink = createFileLink({ uri: serverUri });
+const httpLink = createFileLink({ uri: serverUriGraphQl });
 
 const httpLinkWithAuth = authLink.concat(httpLink);
 

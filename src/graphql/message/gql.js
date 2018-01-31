@@ -10,6 +10,7 @@ export const MESSAGES_QUERY = gql`
       createdAt
       user {
         name
+        avatar
       }
     }
   }
@@ -25,6 +26,7 @@ export const CREATE_MESSAGE_MUTATION = gql`
       fileType
       user {
         name
+        avatar
       }
       channel {
         id
@@ -43,6 +45,7 @@ export const NEW_MESSAGE_SUBSCRIPTION = gql`
       fileType
       user {
         name
+        avatar
       }
     }
   }

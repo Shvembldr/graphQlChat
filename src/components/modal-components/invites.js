@@ -83,7 +83,9 @@ class Invites extends Component {
               </button>
             )}
           </div>
-          {invites.length > 9 && <div className="invite__limit">Invites are limited to 10</div>}
+          {invites.length > 9 && (
+            <div className="invite__limit">Invites are limited to 10</div>
+          )}
         </Fragment>
       )
     );
