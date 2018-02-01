@@ -58,7 +58,14 @@
   color: #5B7272;
 }
 
-.header__notifications--blur-out{
+.header__notifications--blur-out {
+  @include respond-to($mobile) {
+    display: none;
+  }
+
+  @include respond-to($desktop) {
+    display: inline;
+  }
   animation: blur-out-expand 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
   margin-left: 100px;
   font-size: 20px;

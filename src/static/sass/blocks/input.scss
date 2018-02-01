@@ -1,4 +1,11 @@
 .input {
+  @include respond-to($mobile) {
+    margin-bottom: 60px;
+  }
+
+  @include respond-to($desktop) {
+    margin-bottom: 0;
+  }
   display: flex;
   flex-direction: column;
   width: 100%;

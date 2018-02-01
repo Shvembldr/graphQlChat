@@ -19,8 +19,8 @@ const validate = values => {
   if (!values.name) {
     errors.name = 'Required';
   }
-  if (values.name && values.name.length > 15) {
-    errors.name = '15 symbols is max for your name';
+  if (values.name && values.name.length > 10) {
+    errors.name = 'name is too long';
   }
 
   return errors;
@@ -147,7 +147,7 @@ class Profile extends Component {
                     disabled={values.name === user.name}
                     className="form__submit"
                   >
-                    Save Changes
+                    Save Name
                   </button>
                 )}
               </div>

@@ -56,6 +56,15 @@
   }
 }
 
+.channel__item--private {
+  &:before {
+    content: '🔒';
+    left: 24px;
+    top: 5px;
+
+  }
+}
+
 .channel__item label {
   cursor: pointer;
 }

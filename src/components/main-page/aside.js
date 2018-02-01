@@ -111,6 +111,8 @@ class Aside extends Component {
                   onClick={hideSidebar}
                 />
               </div>
+              {<div className="sidebar-main__users-count">{`users: ${users.length}`}</div>}
+
               <div className="sidebar-main__user-container">
                 <div className="sidebar-main__user" onClick={this.showProfile}>
                   {user.name}

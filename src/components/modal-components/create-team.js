@@ -15,8 +15,8 @@ const validate = values => {
     errors.teamName = 'Required';
   }
 
-  if (values.teamName && values.teamName.length > 15) {
-    errors.teamName = '15 symbols is max for team name'
+  if (values.teamName && values.teamName.length > 10) {
+    errors.teamName = 'name is too long'
   }
   return errors;
 };

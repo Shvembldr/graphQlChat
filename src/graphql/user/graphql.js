@@ -3,7 +3,8 @@ import {
   LOGIN_MUTATION,
   REGISTER_USER_MUTATION,
   UPDATE_USER_AVATAR_MUTATION,
-  UPDATE_USER_NAME_MUTATION, USER_AVATAR_QUERY,
+  UPDATE_USER_NAME_MUTATION,
+  USER_AVATAR_QUERY,
   USER_QUERY,
   USERS_QUERY,
 } from './gql';
@@ -48,7 +49,6 @@ export const UserAvatarQuery = graphql(USER_AVATAR_QUERY, {
   },
 });
 
-
 export const UsersQuery = graphql(USERS_QUERY, {
   options: ({ selectedTeam }) => ({
     variables: { teamId: selectedTeam.id },
@@ -85,7 +85,6 @@ export const UpdateUserNameMutation = graphql(UPDATE_USER_NAME_MUTATION, {
       });
     },
   },
-
 });
 
 export const UpdateUserAvatarMutation = graphql(UPDATE_USER_AVATAR_MUTATION, {
@@ -110,5 +109,4 @@ export const UpdateUserAvatarMutation = graphql(UPDATE_USER_AVATAR_MUTATION, {
       });
     },
   },
-
 });

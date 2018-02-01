@@ -8,7 +8,7 @@ const ENTER_KEY = 13;
 class ChatInput extends Component {
   static propTypes = {
     createMessage: PropTypes.func,
-    channelId: PropTypes.number,
+    channel: PropTypes.object,
     userId: PropTypes.number,
   };
 
@@ -37,7 +37,7 @@ class ChatInput extends Component {
           submitting: true,
         });
         await this.props.createMessage({
-          channelId: this.props.channelId,
+          channelId: this.props.channel.id,
           text: this.state.input,
           userId: this.props.userId,
         });
@@ -62,6 +62,7 @@ class ChatInput extends Component {
             className="input__area"
             rows="1"
             maxLength="1000"
+            placeholder={`Write a message to: #${this.props.channel.name}`}
             onChange={this.handleChange}
           />
         </div>
