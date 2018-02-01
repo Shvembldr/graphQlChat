@@ -7,8 +7,19 @@ import Layout from '../main-page/layout';
 class MainPage extends Component {
   static propTypes = {
     user: PropTypes.object,
-    publicChannels: PropTypes.arrayOf(PropTypes.object)
+    publicChannels: PropTypes.arrayOf(PropTypes.object),
+    subscribeToNewChannels: PropTypes.func,
   };
+
+  componentWillMount() {
+    this.unsubscribe = this.props.subscribeToNewChannels();
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
 
   render() {
     const { user } = this.props;

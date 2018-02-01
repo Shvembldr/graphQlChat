@@ -62,7 +62,6 @@ class ChatInput extends Component {
             className="input__area"
             rows="1"
             maxLength="1000"
-            placeholder={`Write a message to: #${this.props.channel.name}`}
             onChange={this.handleChange}
           />
         </div>

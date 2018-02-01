@@ -83,3 +83,15 @@ export const UPDATE_USER_AVATAR_MUTATION = gql`
     }
   }
 `;
+
+export const NEW_CHANNEL_SUBSCRIPTION = gql`
+  subscription newChannelSubscription {
+    newChannel {
+      id
+      name
+      team {
+        id
+      }
+    }
+  }
+`;
