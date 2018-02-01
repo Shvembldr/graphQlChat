@@ -1,6 +1,8 @@
 import { graphql } from 'react-apollo';
 import {
-  LOGIN_MUTATION, NEW_CHANNEL_SUBSCRIPTION,
+  LOGIN_MUTATION,
+  NEW_CHANNEL_SUBSCRIPTION,
+  NEW_TEAM_SUBSCRIPTION,
   REGISTER_USER_MUTATION,
   UPDATE_USER_AVATAR_MUTATION,
   UPDATE_USER_NAME_MUTATION,
@@ -44,13 +46,37 @@ export const UserQuery = graphql(USER_QUERY, {
             }
             return {
               ...prev,
-              channels: [...prev.me.channels, subscriptionData.data.newChannel],
+              me: {
+                ...prev.me,
+                channels: [
+                  ...prev.me.channels,
+                  subscriptionData.data.newChannel,
+                ],
+              },
+            };
+          },
+        });
+      },
+      subscribeToNewTeams: () => {
+        return props.user.subscribeToMore({
+          document: NEW_TEAM_SUBSCRIPTION,
+          updateQuery: (prev, { subscriptionData }) => {
+            if (!subscriptionData) {
+              return prev;
+            }
+
+            return {
+              ...prev,
+              me: {
+                ...prev.me,
+                teams: [...prev.me.teams, subscriptionData.data.newTeam],
+              },
             };
           },
         });
       },
     };
-  }
+  },
 });
 
 export const UserAvatarQuery = graphql(USER_AVATAR_QUERY, {

@@ -8,7 +8,7 @@ export const USER_QUERY = gql`
       email
       avatar
       invites {
-        id  
+        id
         token
       }
       teams {
@@ -34,7 +34,7 @@ export const USER_QUERY = gql`
 `;
 
 export const USER_AVATAR_QUERY = gql`
-query userQuery {
+  query userQuery {
     me {
       name
       avatar
@@ -69,7 +69,7 @@ export const LOGIN_MUTATION = gql`
 `;
 
 export const UPDATE_USER_NAME_MUTATION = gql`
-  mutation updateUserNameMutation($name: String!){
+  mutation updateUserNameMutation($name: String!) {
     updateUserName(name: $name) {
       name
     }
@@ -77,7 +77,7 @@ export const UPDATE_USER_NAME_MUTATION = gql`
 `;
 
 export const UPDATE_USER_AVATAR_MUTATION = gql`
-  mutation updateUserAvatarMutation($file: File!){
+  mutation updateUserAvatarMutation($file: File!) {
     updateUserAvatar(file: $file) {
       avatar
     }
@@ -91,6 +91,22 @@ export const NEW_CHANNEL_SUBSCRIPTION = gql`
       name
       team {
         id
+      }
+    }
+  }
+`;
+
+export const NEW_TEAM_SUBSCRIPTION = gql`
+  subscription newTeamSubscription {
+    newTeam {
+      id
+      name
+      owner {
+        id
+      }
+      channels {
+        id
+        name
       }
     }
   }

@@ -9,16 +9,12 @@ class MainPage extends Component {
     user: PropTypes.object,
     publicChannels: PropTypes.arrayOf(PropTypes.object),
     subscribeToNewChannels: PropTypes.func,
+    subscribeToNewTeams: PropTypes.func,
   };
 
   componentWillMount() {
-    this.unsubscribe = this.props.subscribeToNewChannels();
-  }
-
-  componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
+    this.props.subscribeToNewChannels();
+    this.props.subscribeToNewTeams();
   }
 
   render() {

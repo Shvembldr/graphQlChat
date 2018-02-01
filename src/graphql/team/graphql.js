@@ -42,5 +42,4 @@ export const CreateTeamMutation = graphql(CREATE_TEAM_MUTATION, {
       });
     },
   },
-
 });
