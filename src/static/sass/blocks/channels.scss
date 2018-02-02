@@ -42,7 +42,7 @@
   padding-left: 50px;
   display: flex;
   align-items: center;
-
+  justify-content: space-between;
 
   &:before {
     position: absolute;
@@ -54,6 +54,26 @@
   &:hover {
     background-color: #788686;
   }
+}
+
+.channel__message-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-image: radial-gradient(ellipse closest-corner at center, $second 0%, $last 100%);  margin-right: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease-in-out;
+  transform: scale(0);
+  color: black;
+  font-size: 14px;
+}
+
+.channel__message-count--visible {
+  width: 20px;
+  height: 20px;
+  transform: scale(1)
 }
 
 .channel__item--private {

@@ -7,6 +7,9 @@ export const USER_QUERY = gql`
       name
       email
       avatar
+      messageAlerts {
+        channelId
+      }
       invites {
         id
         token
@@ -19,7 +22,6 @@ export const USER_QUERY = gql`
         }
         channels {
           id
-          name
         }
       }
       channels {
@@ -106,8 +108,15 @@ export const NEW_TEAM_SUBSCRIPTION = gql`
       }
       channels {
         id
-        name
       }
+    }
+  }
+`;
+
+export const NEW_MESSAGE_ALERTS_SUBSCRIPTION = gql`
+  subscription newMessageAlertsSubscription {
+    newAlert {
+      channelId
     }
   }
 `;

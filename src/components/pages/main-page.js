@@ -10,11 +10,13 @@ class MainPage extends Component {
     publicChannels: PropTypes.arrayOf(PropTypes.object),
     subscribeToNewChannels: PropTypes.func,
     subscribeToNewTeams: PropTypes.func,
+    subscribeToNewMessageAlerts: PropTypes.func,
   };
 
   componentWillMount() {
     this.props.subscribeToNewChannels();
     this.props.subscribeToNewTeams();
+    this.props.subscribeToNewMessageAlerts();
   }
 
   render() {

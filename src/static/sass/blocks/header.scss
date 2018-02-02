@@ -5,6 +5,7 @@
   background-color: transparent;
   height: 5%;
   min-height: 65px;
+  padding: 10px 40px;
   width: 100%;
   border-bottom: 1px solid $fourth;
 }
@@ -31,7 +32,7 @@
   position: relative;
   cursor: pointer;
   font-weight: bold;
-  padding-left: 40px;
+  padding-left: 10px;
   display: flex;
   align-items: center;
 
@@ -39,7 +40,7 @@
   &:before {
     position: absolute;
     content: '#';
-    left: 30px;
+    left: 0;
     top: 0;
   }
 }

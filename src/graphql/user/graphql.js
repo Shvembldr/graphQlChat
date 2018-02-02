@@ -2,6 +2,7 @@ import { graphql } from 'react-apollo';
 import {
   LOGIN_MUTATION,
   NEW_CHANNEL_SUBSCRIPTION,
+  NEW_MESSAGE_ALERTS_SUBSCRIPTION,
   NEW_TEAM_SUBSCRIPTION,
   REGISTER_USER_MUTATION,
   UPDATE_USER_AVATAR_MUTATION,
@@ -64,12 +65,32 @@ export const UserQuery = graphql(USER_QUERY, {
             if (!subscriptionData) {
               return prev;
             }
-
             return {
               ...prev,
               me: {
                 ...prev.me,
                 teams: [...prev.me.teams, subscriptionData.data.newTeam],
+              },
+            };
+          },
+        });
+      },
+      subscribeToNewMessageAlerts: () => {
+        return props.user.subscribeToMore({
+          document: NEW_MESSAGE_ALERTS_SUBSCRIPTION,
+          updateQuery: (prev, { subscriptionData }) => {
+            if (!subscriptionData) {
+              return prev;
+            }
+
+            return {
+              ...prev,
+              me: {
+                ...prev.me,
+                messageAlerts: [
+                  ...prev.me.messageAlerts,
+                  subscriptionData.data.newAlert,
+                ],
               },
             };
           },

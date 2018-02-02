@@ -12,10 +12,16 @@
   align-items: center;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
+  position: relative;
 
   &:hover {
     animation: shadow-drop-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   }
+}
+
+.team--unread {
+  border: 1px solid darkred;
+  background-color: rgba(139, 56, 15, 0.2);
 }
 
 .team__select {

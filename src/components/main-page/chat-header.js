@@ -12,6 +12,7 @@ class ChatHeader extends Component {
     user: PropTypes.object,
     userId: PropTypes.number,
     channel: PropTypes.object,
+    team: PropTypes.object,
     notifications: PropTypes.arrayOf(PropTypes.object),
     subscribeToNewNotifications: PropTypes.func,
   };

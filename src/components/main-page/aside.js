@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'react-apollo';
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 import { showModal } from '../../redux/actions/modal';
@@ -10,8 +12,9 @@ import UseInvite from '../modal-components/use-invite';
 import Profile from '../modal-components/profile';
 import { UsersQuery } from '../../graphql/user/graphql';
 import { hideSidebar } from '../../redux/actions/sidebar';
+import { RemoveAlertsMutation } from '../../graphql/alerts/graphql';
 
-@UsersQuery
+@compose(UsersQuery, RemoveAlertsMutation)
 class Aside extends Component {
   static propTypes = {
     user: PropTypes.object,
@@ -25,6 +28,23 @@ class Aside extends Component {
     users: PropTypes.arrayOf(PropTypes.object),
     isVisible: PropTypes.bool,
     hideSidebar: PropTypes.func,
+    removeAlerts: PropTypes.func,
+  };
+
+  componentDidMount = async () => {
+    if (this.props.alerts[this.props.selectedChannel.id] > 0) {
+      await this.props.removeAlerts({
+        channelId: this.props.selectedChannel.id,
+      });
+    }
+  };
+
+  componentWillReceiveProps = async nextProps => {
+    if (nextProps.alerts[this.props.selectedChannel.id] > 0) {
+      await this.props.removeAlerts({
+        channelId: this.props.selectedChannel.id,
+      });
+    }
   };
 
   addChannel = () => {
@@ -61,7 +81,7 @@ class Aside extends Component {
   };
 
   showProfile = () => {
-    this.props.showModal(<Profile/>);
+    this.props.showModal(<Profile />);
   };
 
   render() {
@@ -74,6 +94,7 @@ class Aside extends Component {
       selectChannel,
       isVisible,
       hideSidebar,
+      alerts,
     } = this.props;
     return (
       users && (
@@ -93,7 +114,18 @@ class Aside extends Component {
                     htmlFor={`team-${team.id}`}
                     onClick={() => selectTeam(team)}
                   >
-                    <div className="team">{team.name.substr(0, 1)}</div>
+                    <div
+                      className={
+                        _.intersection(
+                          team.channels.map(channel => channel.id),
+                          Object.keys(alerts).map(key => parseInt(key, 10)),
+                        ).length === 0
+                          ? 'team'
+                          : 'team team--unread'
+                      }
+                    >
+                      {team.name.substr(0, 1)}
+                    </div>
                   </label>
                 </li>
               ))}
@@ -111,7 +143,7 @@ class Aside extends Component {
                   onClick={hideSidebar}
                 />
               </div>
-              {<div className="sidebar-main__users-count">{`users: ${users.length}`}</div>}
+              {/*{<div className="sidebar-main__users-count">{`users: ${users.length}`}</div>}*/}
 
               <div className="sidebar-main__user-container">
                 <div className="sidebar-main__user" onClick={this.showProfile}>
@@ -136,12 +168,8 @@ class Aside extends Component {
                     +
                   </div>
                 </div>
-                {selectedTeam.channels
-                  .concat(
-                    user.channels.filter(
-                      channel => channel.team.id === selectedTeam.id,
-                    ),
-                  )
+                {user.channels
+                  .filter(channel => channel.team.id === selectedTeam.id)
                   .map(channel => (
                     <li key={channel.id}>
                       <input
@@ -157,6 +185,17 @@ class Aside extends Component {
                         onClick={() => selectChannel(channel)}
                       >
                         {channel.name}
+                        <div
+                          className={
+                            alerts[channel.id] === 0 ||
+                            !alerts[channel.id] ||
+                            selectedChannel.id === channel.id
+                              ? 'channel__message-count'
+                              : 'channel__message-count channel__message-count--visible'
+                          }
+                        >
+                          {alerts[channel.id]}
+                        </div>
                       </label>
                     </li>
                   ))}

@@ -41,8 +41,16 @@
 }
 
 .message__image {
-  max-width: 400px;
-  max-height: 300px;
+  @include respond-to($mobile) {
+    max-width: 300px;
+    max-height: 200px;
+  }
+
+  @include respond-to($desktop) {
+    max-width: 400px;
+    max-height: 300px;
+  }
+
   margin: 10px 0;
 }
 

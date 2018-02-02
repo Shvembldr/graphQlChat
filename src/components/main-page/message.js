@@ -1,17 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import {serverUri} from "../../constants";
+import { serverUri } from '../../constants';
 
 const Message = ({ message: { url, text, fileType } }) => {
   if (url) {
     if (fileType.startsWith('image/')) {
       return (
         <Fragment>
-          <img
-            className="message__image"
-            src={url}
-            alt={text}
-          />
+          <img className="message__image" src={url} alt={text} />
           {text && <div className="message__text">{text}</div>}
         </Fragment>
       );
@@ -29,7 +25,7 @@ const Message = ({ message: { url, text, fileType } }) => {
 };
 
 Message.propTypes = {
-  message: PropTypes.object
+  message: PropTypes.object,
 };
 
 export default Message;
