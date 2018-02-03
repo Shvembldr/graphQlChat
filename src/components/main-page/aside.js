@@ -194,7 +194,7 @@ class Aside extends Component {
                               : 'channel__message-count channel__message-count--visible'
                           }
                         >
-                          {alerts[channel.id]}
+                          {alerts[channel.id] < 99 ? alerts[channel.id] : '!!'}
                         </div>
                       </label>
                     </li>

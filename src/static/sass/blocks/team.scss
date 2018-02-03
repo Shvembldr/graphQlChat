@@ -20,8 +20,23 @@
 }
 
 .team--unread {
-  border: 1px solid darkred;
-  background-color: rgba(139, 56, 15, 0.2);
+  border: 1px solid $last;
+  //background-color: rgba(91, 114, 114, 0.2);
+  color: $last;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    content: '';
+    border-style: solid;
+    border-width: 0 10px 10px 0;
+    border-color: transparent $last transparent transparent;
+  }
+
 }
 
 .team__select {
@@ -66,6 +81,23 @@
 .team__select:checked ~ label .team {
   border: 2px solid $last;
   background-color: $fourth;
+}
+
+.team__select:checked ~ label .team .team--unread {
+  border: 2px solid $last;
+  background-color: $fourth;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    content: '';
+    border-style: solid;
+    border-width: 0 10px 10px 0;
+    border-color: transparent $last transparent transparent;
+  }
 }
 
 @keyframes shadow-drop-center {
