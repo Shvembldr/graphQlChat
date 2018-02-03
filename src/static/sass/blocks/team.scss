@@ -14,29 +14,33 @@
   transition: all 0.2s ease-in-out;
   position: relative;
 
+  &:before {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid $last;
+    content: '';
+    background-color: $first;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+  }
+
   &:hover {
-    animation: shadow-drop-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: shadow-drop-center 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
 }
 
 .team--unread {
   border: 1px solid $last;
-  //background-color: rgba(91, 114, 114, 0.2);
   color: $last;
   position: relative;
 
   &:before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10px;
-    height: 10px;
-    content: '';
-    border-style: solid;
-    border-width: 0 10px 10px 0;
-    border-color: transparent $last transparent transparent;
+    transform: scale(1);
   }
-
 }
 
 .team__select {
@@ -72,7 +76,7 @@
     height: 1px;
     background-color: $last;
   }
-  
+
   &:hover {
     opacity: 1;
   }
@@ -108,4 +112,3 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.35);
   }
 }
-

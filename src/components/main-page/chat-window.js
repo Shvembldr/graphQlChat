@@ -37,7 +37,6 @@ class ChatWindow extends Component {
 
   render() {
     const { messages, channelId, user } = this.props;
-    console.log(messages)
     return (
       messages && (
         <ChatFileUpload channelId={channelId} userId={user.id}>

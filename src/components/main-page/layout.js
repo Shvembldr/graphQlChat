@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
 import Aside from './aside';
 import ChatWindow from './chat-window';
@@ -13,6 +12,7 @@ class Layout extends Component {
   static propTypes = {
     user: PropTypes.object,
     removeAlerts: PropTypes.func,
+    alerts: PropTypes.object,
   };
 
   state = {
@@ -32,16 +32,17 @@ class Layout extends Component {
   };
 
   selectChannel = async channel => {
-    await this.props.removeAlerts({channelId: channel.id});
+    if (this.props.alerts[channel.id]) {
+      await this.props.removeAlerts({ channelId: channel.id });
+    }
     this.setState({
       selectedChannel: channel,
     });
   };
 
   render() {
-    const { user } = this.props;
+    const { user, alerts } = this.props;
     const { selectedTeam, selectedChannel } = this.state;
-    const alerts = _.countBy(user.messageAlerts, alert => alert.channelId);
     return (
       <main className="main-page">
         <Aside

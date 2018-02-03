@@ -9,6 +9,7 @@ export const MessagesQuery = graphql(MESSAGES_QUERY, {
   name: 'messages',
   options: ({ channelId }) => ({
     variables: { channelId },
+    fetchPolicy: 'network-only',
   }),
   props: props => {
     const { error, loading, messages } = props.messages;

@@ -60,7 +60,9 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-image: radial-gradient(ellipse closest-corner at center, $second 0%, $last 100%);  margin-right: 50%;
+  background: $first;
+  border: 1px solid $fourth;
+  margin-right: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,6 +70,7 @@
   transform: scale(0);
   color: black;
   font-size: 14px;
+  opacity: 0.7;
 }
 
 .channel__message-count--visible {

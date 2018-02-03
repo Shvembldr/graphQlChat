@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+
 import { UserQuery } from '../../graphql/user/graphql';
 import Layout from '../main-page/layout';
 
@@ -24,7 +26,10 @@ class MainPage extends Component {
     return (
       user && (
         <div>
-          <Layout user={user} />
+          <Layout
+            user={user}
+            alerts={_.countBy(user.messageAlerts, alert => alert.channelId)}
+          />
         </div>
       )
     );
