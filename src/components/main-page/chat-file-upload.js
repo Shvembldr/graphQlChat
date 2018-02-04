@@ -26,9 +26,9 @@ class ChatFileUpload extends Component {
     const { children } = this.props;
     return (
       <Dropzone
-        className="chat__window"
         onDrop={this.sendFile}
         disableClick={true}
+        className="ignore"
       >
         {children}
       </Dropzone>

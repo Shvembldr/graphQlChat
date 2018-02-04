@@ -1,17 +1,20 @@
 import gql from 'graphql-tag';
 
 export const MESSAGES_QUERY = gql`
-  query messagesQuery($channelId: Int!) {
-    messages(channelId: $channelId) {
-      id
-      text
-      url
-      fileType
-      createdAt
-      user {
-        name
-        avatar
+  query messagesQuery($cursor: String, $channelId: Int!) {
+    messagesFeed(cursor: $cursor, channelId: $channelId) {
+      messages {
+        id
+        text
+        url
+        fileType
+        createdAt
+        user {
+          name
+          avatar
+        }
       }
+      hasNextPage
     }
   }
 `;

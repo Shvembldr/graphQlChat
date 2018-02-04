@@ -6,19 +6,19 @@ import {
 } from './gql';
 
 export const MessagesQuery = graphql(MESSAGES_QUERY, {
-  name: 'messages',
+  name: 'messagesQuery',
   options: ({ channelId }) => ({
     variables: { channelId },
     fetchPolicy: 'network-only',
   }),
-  props: props => {
-    const { error, loading, messages } = props.messages;
+  props: ({ messagesQuery }) => {
+    const { error, loading, messagesFeed } = messagesQuery;
     return {
       loading: loading,
       error: error,
-      messages: messages ? messages : null,
+      messages: messagesFeed ? messagesFeed.messages : null,
       subscribeToNewMessages: channelId => {
-        return props.messages.subscribeToMore({
+        return messagesQuery.subscribeToMore({
           document: NEW_MESSAGE_SUBSCRIPTION,
           variables: {
             channelId,
@@ -30,10 +30,45 @@ export const MessagesQuery = graphql(MESSAGES_QUERY, {
 
             return {
               ...prev,
-              messages: [...prev.messages, subscriptionData.data.newMessage],
+              messagesFeed: {
+                ...prev.messagesFeed,
+                messages: [
+                  subscriptionData.data.newMessage,
+                  ...prev.messagesFeed.messages,
+                ],
+              },
             };
           },
         });
+      },
+      fetchMoreMessages: ({ cursor, channelId }) => {
+        if (messagesQuery.messagesFeed.hasNextPage) {
+          return messagesQuery.fetchMore({
+            variables: {
+              channelId,
+              cursor,
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              if (!fetchMoreResult) {
+                return previousResult;
+              }
+
+              const messages = [
+                ...previousResult.messagesFeed.messages,
+                ...fetchMoreResult.messagesFeed.messages,
+              ];
+
+              return {
+                ...previousResult,
+                messagesFeed: {
+                  ...previousResult.messagesFeed,
+                  messages,
+                  hasNextPage: fetchMoreResult.messagesFeed.hasNextPage,
+                },
+              };
+            },
+          });
+        }
       },
     };
   },
@@ -50,23 +85,4 @@ export const createMessageMutation = graphql(CREATE_MESSAGE_MUTATION, {
             variables: { input: { channelId, text, userId } },
           }),
   }),
-
-  // options: {
-  //   update: (proxy, { data: { createMessage } }) => {
-  //     const data = proxy.readQuery({
-  //       query: MESSAGES_QUERY,
-  //       variables: {
-  //         channelId: createMessage.channel.id,
-  //       },
-  //     });
-  //     data.messages.push(createMessage);
-  //     proxy.writeQuery({
-  //       query: MESSAGES_QUERY,
-  //       variables: {
-  //         channelId: createMessage.channel.id,
-  //       },
-  //       data,
-  //     });
-  //   },
-  // },
 });
