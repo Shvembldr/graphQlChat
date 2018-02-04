@@ -36,6 +36,8 @@ class UseInvite extends Component {
       switch(err.toString()) {
         case 'Error: GraphQL error: jwt malformed':
           return { invite: "Your invite is invalid" };
+        case 'Error: GraphQL error: Your invite is invalid':
+          return { invite: "Your invite is invalid" };
         case 'Error: GraphQL error: jwt expired':
           return { invite: "Your invite is expired" };
         case 'Error: GraphQL error: You can not use your own invite':

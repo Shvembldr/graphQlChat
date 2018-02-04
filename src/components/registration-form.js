@@ -18,7 +18,7 @@ const RegistrationForm = ({ onSubmit, user }) => {
       errors.password = 'Required';
     }
     if (values.password && values.password.length < 8) {
-      errors.password = 'Name length must be more than 8 symbols';
+      errors.password = 'Password length must be more than 8 symbols';
     }
     if (!values.password2) {
       errors.password2 = 'Required';

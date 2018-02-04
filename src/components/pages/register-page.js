@@ -23,6 +23,8 @@ class RegisterPage extends Component {
           return { email: "Email is taken" };
         case 'Error: GraphQL error: jwt malformed':
           return { invite: "Your invite is invalid" };
+        case 'Error: GraphQL error: Your invite is invalid':
+          return { invite: "Your invite is invalid" };
         case 'Error: GraphQL error: jwt expired':
           return { invite: "Your invite is expired" };
         default:
