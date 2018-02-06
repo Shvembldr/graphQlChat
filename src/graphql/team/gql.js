@@ -11,6 +11,9 @@ export const ADD_USER_TO_TEAM_MUTATION = gql`
       channels {
         id
         name
+        team {
+          id
+        }
       }
     }
   }

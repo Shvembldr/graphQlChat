@@ -96,7 +96,6 @@ class Aside extends Component {
       hideSidebar,
       alerts,
     } = this.props;
-    // console.log(alerts[selectedChannel.id]);
     return (
       users && (
         <Fragment>

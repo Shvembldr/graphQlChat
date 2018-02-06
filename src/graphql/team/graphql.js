@@ -14,7 +14,9 @@ export const AddUserToTeam = graphql(ADD_USER_TO_TEAM_MUTATION, {
       const data = proxy.readQuery({
         query: USER_QUERY,
       });
+
       data.me.teams.push(addUserToTeam);
+      data.me.channels.push(...addUserToTeam.channels);
       proxy.writeQuery({
         query: USER_QUERY,
         data,

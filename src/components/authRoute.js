@@ -21,7 +21,7 @@ const checkAuth = () => {
   return true;
 };
 
-export const AuthRoute = ({ component: Component, ...rest }) => (
+const AuthRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -37,3 +37,5 @@ export const AuthRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
+
+export default AuthRoute;

@@ -8,7 +8,7 @@ import LoginPage from './components/pages/login-page';
 import MainPage from './components/pages/main-page';
 import RegisterPage from "./components/pages/register-page";
 import history from './history';
-import {AuthRoute} from "./components/authRoute";
+import AuthRoute from "./components/authRoute";
 import Modal from './components/common/modal';
 
 class App extends Component {
