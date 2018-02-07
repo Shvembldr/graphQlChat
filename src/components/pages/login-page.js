@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import LoginForm from '../login-form';
 import { LoginMutation } from '../../graphql/user/graphql';
 import history from './../../history';
-import {FORM_ERROR} from "final-form";
+import { FORM_ERROR } from 'final-form';
+import { wsLink } from '../../apollo';
 
 @LoginMutation
 class LoginPage extends Component {
   static propTypes = {
-    login: PropTypes.func
+    login: PropTypes.func,
   };
 
   onSubmit = async ({ email, password }) => {
@@ -21,15 +22,16 @@ class LoginPage extends Component {
       });
       localStorage.setItem('x-token', token);
       localStorage.setItem('x-refresh-token', refreshToken);
+      wsLink.subscriptionClient.tryReconnect();
       history.push('/');
     } catch (err) {
-      switch(err.toString()) {
+      switch (err.toString()) {
         case 'Error: GraphQL error: User does not exist':
-          return { email: "User does not exist" };
+          return { email: 'User does not exist' };
         case 'Error: GraphQL error: Wrong password':
-          return { password: "Wrong password" };
+          return { password: 'Wrong password' };
         default:
-          return { [FORM_ERROR]: "Login failed" };
+          return { [FORM_ERROR]: 'Login failed' };
       }
     }
   };

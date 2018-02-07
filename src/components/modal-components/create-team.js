@@ -66,7 +66,7 @@ class CreateTeam extends Component {
               options={options}
               placeholder={'add users'}
             />
-            <div className="form__error form__error--full">
+            <div className="form__error form__error--modal">
               {submitError}
             </div>
             <div className="form__button-container">

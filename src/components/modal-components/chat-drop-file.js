@@ -55,7 +55,7 @@ class ChatDropFile extends Component {
             <div className="form__file-name">{file.name}</div>
 
             {file.size > 5000000 ? (
-              <div className="form__error form__error--full">
+              <div className="form__error form__error--modal">
                 you can't upload files more than 5 mb
               </div>
             ) : (

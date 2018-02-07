@@ -123,7 +123,13 @@
 }
 
 .form__error--full {
-  bottom: 0px;
+  bottom: 0;
+  opacity: 1;
+  font-size: 14px;
+}
+
+.form__error--modal {
+  bottom: 20px;
   opacity: 1;
   font-size: 14px;
 }

@@ -62,7 +62,7 @@ class UseInvite extends Component {
               component={Input}
               label={'Enter your invite'}
             />
-            <div className="form__error form__error--full">
+            <div className="form__error form__error--modal">
               {submitError}
             </div>
             <div className="form__button-container">

@@ -96,6 +96,7 @@ class Aside extends Component {
       hideSidebar,
       alerts,
     } = this.props;
+
     return (
       users && (
         <Fragment>

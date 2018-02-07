@@ -14,8 +14,9 @@ import history from './history';
 const token = localStorage.getItem('x-token');
 const refreshToken = localStorage.getItem('x-refresh-token');
 
-const wsLink = new WebSocketLink({
+export const wsLink = new WebSocketLink({
   uri: socketUri,
+  lazy: true,
   options: {
     reconnect: true,
     connectionParams: {

@@ -82,7 +82,6 @@ export const UserQuery = graphql(USER_QUERY, {
             if (!subscriptionData) {
               return prev;
             }
-
             return {
               ...prev,
               me: {

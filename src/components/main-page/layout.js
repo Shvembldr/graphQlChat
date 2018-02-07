@@ -22,13 +22,18 @@ class Layout extends Component {
     )[0],
   };
 
-  selectTeam = team => {
-    this.setState({
+  selectTeam = async team => {
+    await this.setState({
       selectedTeam: team,
       selectedChannel: this.props.user.channels.filter(
         channel => channel.team.id === team.id,
       )[0],
     });
+
+    console.log(this.props.alerts[this.state.selectedChannel.id])
+    if (this.props.alerts[this.state.selectedChannel.id]) {
+      await this.props.removeAlerts({ channelId: this.state.selectedChannel.id });
+    }
   };
 
   selectChannel = async channel => {
